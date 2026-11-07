@@ -32,4 +32,4 @@ RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/public#' \
 ENV PORT=10000
 EXPOSE 10000
 
-CMD ["sh", "-c", "php artisan migrate --force && exec apache2-foreground"]
+CMD ["apache2-foreground"]
