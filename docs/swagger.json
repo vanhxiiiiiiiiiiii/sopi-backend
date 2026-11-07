@@ -1,0 +1,3487 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "E-Commerce API",
+        "description": "As the title, this is API documentation of my simple E-Commerce API. We have deployed it on the internet with host `tp-o.tk` (You can choose it in the selection below). Azure for Students account is used to hire the AKS, so the server may be down whenever free credits run out. If that happens, clone this [repo](https://github.com/tp-o/e-commerce-api/tree/2.x.x) and run it on local environment before accessing API endpoints.",
+        "version": "2.x.x",
+        "license": {
+            "name": "MIT",
+            "url": "https://github.com/tp-o/e-commerce-api/blob/2.x.x/LICENSE"
+        }
+    },
+    "servers": [
+        {
+            "url": "{protocol}://{host}:{port}/api/v2",
+            "variables": {
+                "protocol": {
+                    "default": "https",
+                    "enum": [
+                        "http",
+                        "https"
+                    ]
+                },
+                "host": {
+                    "default": "127.0.0.1",
+                    "enum": [
+                        "127.0.0.1",
+                        "localhost",
+                        "tp-o.tk"
+                    ]
+                },
+                "port": {
+                    "default": "443"
+                }
+            },
+            "description": "Localhost"
+        }
+    ],
+    "tags": [
+        {
+            "name": "publish",
+            "description": "For everyone"
+        },
+        {
+            "name": "signed-in",
+            "description": "For signed-in people"
+        },
+        {
+            "name": "user",
+            "description": "For users"
+        },
+        {
+            "name": "shop",
+            "description": "For users having shop"
+        },
+        {
+            "name": "admin",
+            "description": "For admins"
+        },
+        {
+            "name": "resource",
+            "description": "Resource management"
+        },
+        {
+            "name": "auth",
+            "description": "Authentication"
+        },
+        {
+            "name": "account",
+            "description": "Account management"
+        },
+        {
+            "name": "product",
+            "description": "Product and related resources management"
+        },
+        {
+            "name": "cart",
+            "description": "Shopping cart"
+        },
+        {
+            "name": "order",
+            "description": "Order management"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "token"
+            }
+        },
+        "schemas": {}
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "paths": {
+        "/shops/{id_or_slug}": {
+            "get": {
+                "tags": [
+                    "publish"
+                ],
+                "summary": "Get public information of the shop",
+                "operationId": "getShop",
+                "parameters": [
+                    {
+                        "name": "id_or_slug",
+                        "in": "path",
+                        "description": "ID or slug of shop",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/shops/{id_or_slug}/products": {
+            "get": {
+                "tags": [
+                    "publish",
+                    "product"
+                ],
+                "summary": "Get publised products of the shop",
+                "operationId": "getPublishedProductsOfShop",
+                "parameters": [
+                    {
+                        "name": "id_or_slug",
+                        "in": "path",
+                        "description": "ID or slug of shop",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "publish",
+                    "product"
+                ],
+                "summary": "Get product by ID",
+                "operationId": "getProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/products/{id}/reviews": {
+            "get": {
+                "tags": [
+                    "publish",
+                    "product"
+                ],
+                "summary": "Get reviews of the product",
+                "operationId": "getProductReview",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit number of reviews per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/products/search": {
+            "get": {
+                "tags": [
+                    "publish",
+                    "product"
+                ],
+                "summary": "Search product by keyword and filter",
+                "operationId": "searchProduct",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit number of products per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Product's keyword (required if filter is not presented)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Product's filter (required if keyword is not presented)",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "category_ids": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "description": "Order by newest, high price to low price, or low price to high price",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "enum": [
+                                1,
+                                2,
+                                3
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/products/feature": {
+            "get": {
+                "tags": [
+                    "publish",
+                    "product"
+                ],
+                "summary": "Get feature products",
+                "operationId": "getFeatureProduct",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit number of products per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/products/categories/{id}/children": {
+            "get": {
+                "tags": [
+                    "publish",
+                    "product"
+                ],
+                "summary": "Get children of the category",
+                "operationId": "getCategoryChildren",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/resource/images": {
+            "post": {
+                "tags": [
+                    "signed-in",
+                    "resource"
+                ],
+                "summary": "Upload images (Access /resources/images/<id> to get the image)",
+                "operationId": "uploadImages",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "Uploaded image"
+                                    },
+                                    "ratio": {
+                                        "type": "integer",
+                                        "enum": [
+                                            0,
+                                            1
+                                        ],
+                                        "description": "0 is avatar - 1 is banner"
+                                    }
+                                },
+                                "required": [
+                                    "image",
+                                    "ratio"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/user/auth/sign-up": {
+            "post": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Sign up an user account",
+                "operationId": "userSignUp",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Username of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "Confirm the password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/user/auth/sign-in": {
+            "post": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Sign in as an user",
+                "operationId": "userSignIn",
+                "parameters": [
+                    {
+                        "name": "usernameOrEmail",
+                        "in": "query",
+                        "description": "Username or email of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input or incorrect credentials"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/user/auth/sign-out": {
+            "post": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Sign out as an user",
+                "operationId": "userSignOut",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/oauth/{driver}/redirect": {
+            "get": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Sign in with third party",
+                "operationId": "oauthRedirect",
+                "parameters": [
+                    {
+                        "name": "driver",
+                        "in": "path",
+                        "description": "Supported third party",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "facebook",
+                                "google",
+                                "github"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "301": {
+                        "description": "Success"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/user/email/verify": {
+            "post": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Request to send verification email",
+                "operationId": "sendVerificationEmail",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/email/verify/{id}/{hash}": {
+            "get": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Verify an user's email",
+                "operationId": "verifyUserEmail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "hash",
+                        "in": "path",
+                        "description": "Unique hash string unique hash generated by user id and secret key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "signature",
+                        "in": "query",
+                        "description": "Signature of system",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Not allow"
+                    }
+                }
+            }
+        },
+        "/user/password": {
+            "put": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Update user's password",
+                "operationId": "updateUserPassword",
+                "parameters": [
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Current password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "Confirm current password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "new_password",
+                        "in": "query",
+                        "description": "New password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/password/forgot": {
+            "post": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Request to send reset-user-password email",
+                "operationId": "forgotUserPassowrd",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of account forgot password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/user/password/reset": {
+            "post": {
+                "tags": [
+                    "user",
+                    "auth"
+                ],
+                "summary": "Reset user's password",
+                "operationId": "resetUserPassword",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Unique token to reset password (deleted after resetting)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of account reset password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "New password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "passsword_confirmation",
+                        "in": "query",
+                        "description": "Confirm new password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/user/account/profile": {
+            "get": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Get user's profile",
+                "operationId": "getUserProfile",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Update user's profile",
+                "operationId": "updateUserProfile",
+                "parameters": [
+                    {
+                        "name": "display_name",
+                        "in": "query",
+                        "description": "Display name of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone number of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "description": "Gender of user",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "enum": [
+                                1,
+                                2,
+                                3
+                            ]
+                        }
+                    },
+                    {
+                        "name": "date_of_birth",
+                        "in": "query",
+                        "description": "Date of birth of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "avatar_image",
+                        "in": "query",
+                        "description": "Id of image",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/account/addresses": {
+            "get": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Get user's address",
+                "operationId": "getAllUserAddresses",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Create user's address",
+                "operationId": "createUserAddress",
+                "parameters": [
+                    {
+                        "name": "full_name",
+                        "in": "query",
+                        "description": "Full name of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone number of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "town",
+                        "in": "query",
+                        "description": "Town of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Detailed address of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "is_home",
+                        "in": "query",
+                        "description": "Mark as home address",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "is_pickup_address",
+                        "in": "query",
+                        "description": "Mark as pickup address",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "is_default_address",
+                        "in": "query",
+                        "description": "Mark as default address",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "is_return_address",
+                        "in": "query",
+                        "description": "Mark as return address",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/account/addresses/{id}": {
+            "put": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Update user's address",
+                "operationId": "updateUserAddress",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Address's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "full_name",
+                        "in": "query",
+                        "description": "Full name of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone number of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "town",
+                        "in": "query",
+                        "description": "Town of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Detailed address of user",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "is_home",
+                        "in": "query",
+                        "description": "Mark as home address",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "is_pickup_address",
+                        "in": "query",
+                        "description": "Mark as pickup address",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "is_default_address",
+                        "in": "query",
+                        "description": "Mark as default address",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "is_return_address",
+                        "in": "query",
+                        "description": "Mark as return address",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Delete user's address",
+                "operationId": "deleteUserAddress",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Address's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/user/account/bank-accounts": {
+            "get": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Get user's bank account",
+                "operationId": "getAllUserBankAccount",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Create user's bank account",
+                "operationId": "createUserBankAccount",
+                "parameters": [
+                    {
+                        "name": "accountholder_name",
+                        "in": "query",
+                        "description": "Holder name of bank account",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "identification_number",
+                        "in": "query",
+                        "description": "Identification number of holder",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "bank_name",
+                        "in": "query",
+                        "description": "Name of bank",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "bank_branch",
+                        "in": "query",
+                        "description": "Name of bank's branch",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "account_number",
+                        "in": "query",
+                        "description": "Account number of bank account",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/account/bank-accounts/{id}": {
+            "put": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Update user's bank account",
+                "operationId": "updateUserBankAccount",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bank account's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "accountholder_name",
+                        "in": "query",
+                        "description": "Holder name of bank account",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "identification_number",
+                        "in": "query",
+                        "description": "Identification number of holder",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "bank_name",
+                        "in": "query",
+                        "description": "Name of bank",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "bank_branch",
+                        "in": "query",
+                        "description": "Name of bank's branch",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "account_number",
+                        "in": "query",
+                        "description": "Account number of bank account",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Delete user's bank account",
+                "operationId": "deleteUserBankAccount",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bank account's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/user/account/credit-cards": {
+            "get": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Get user's credit card",
+                "operationId": "getAllUseCreditCard",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Create user's credit card",
+                "operationId": "createUserCreditCard",
+                "parameters": [
+                    {
+                        "name": "cardholder_name",
+                        "in": "query",
+                        "description": "Holder name of card",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "expiry_date",
+                        "in": "query",
+                        "description": "Expiration date of card (MM/YY)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "cvv",
+                        "in": "query",
+                        "description": "CVV of card",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "registration_address",
+                        "in": "query",
+                        "description": "Card registration address",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "postal_code",
+                        "in": "query",
+                        "description": "Postal code of Card registration address (5 digits)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "card_number",
+                        "in": "query",
+                        "description": "Card number",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/account/credit-cards/{id}": {
+            "put": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Update user's credit card",
+                "operationId": "updateUserCreditCard",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Credit card's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "cardholder_name",
+                        "in": "query",
+                        "description": "Holder name of card",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "expiry_date",
+                        "in": "query",
+                        "description": "Expiration date of card (MM/YY)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "cvv",
+                        "in": "query",
+                        "description": "CVV of card",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "registration_address",
+                        "in": "query",
+                        "description": "Card registration address",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "postal_code",
+                        "in": "query",
+                        "description": "Postal code of Card registration address (5 digits)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "card_number",
+                        "in": "query",
+                        "description": "Card number",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "user",
+                    "account"
+                ],
+                "summary": "Delete user's credit card",
+                "operationId": "deleteUserCreditCard",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Credit card's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/user/cart": {
+            "get": {
+                "tags": [
+                    "user",
+                    "cart"
+                ],
+                "summary": "Get shopping cart",
+                "operationId": "getCart",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit number of cart items per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user",
+                    "cart"
+                ],
+                "summary": "Update or add cart item",
+                "operationId": "updateCart",
+                "parameters": [
+                    {
+                        "name": "product_model_id",
+                        "in": "query",
+                        "description": "Product model's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "Number of products",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/cart/{product_model_id}": {
+            "delete": {
+                "tags": [
+                    "user",
+                    "cart"
+                ],
+                "summary": "Delete cart item",
+                "operationId": "deleteCartItem",
+                "parameters": [
+                    {
+                        "name": "product_model_id",
+                        "in": "path",
+                        "description": "Product model's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/orders": {
+            "get": {
+                "tags": [
+                    "user",
+                    "order"
+                ],
+                "summary": "Get orders by status",
+                "operationId": "getOrderByStatus",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit number of orders per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "status_id",
+                        "in": "query",
+                        "description": "Order status's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user",
+                    "order"
+                ],
+                "summary": "Create orders",
+                "operationId": "createOrder",
+                "parameters": [
+                    {
+                        "name": "address_id",
+                        "in": "query",
+                        "description": "Address's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "orders",
+                        "in": "query",
+                        "description": "List of orders",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "product_model_id": {
+                                        "type": "integer"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "product_model_id",
+                                    "quantity"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/orders/{id}": {
+            "get": {
+                "tags": [
+                    "user",
+                    "order"
+                ],
+                "summary": "Get orders by ID",
+                "operationId": "getOrderById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/orders/{id}/cancel": {
+            "post": {
+                "tags": [
+                    "user",
+                    "order"
+                ],
+                "summary": "Mark order as cancelled",
+                "operationId": "markOrderAsCancelledByUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "Note",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/user/reviews": {
+            "post": {
+                "tags": [
+                    "user",
+                    "product"
+                ],
+                "summary": "Create a product review",
+                "operationId": "createProductReview",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "query",
+                        "description": "Order's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "description": "Rating star",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "enum": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ]
+                        }
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "description": "Comment",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/shop": {
+            "get": {
+                "tags": [
+                    "shop"
+                ],
+                "summary": "Get shop of current user",
+                "operationId": "getMyShop",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "shop"
+                ],
+                "summary": "Create a shop for current user",
+                "operationId": "createMyShop",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of shop",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "slug",
+                        "in": "query",
+                        "description": "Unique string used to identify the shop",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone number of shop",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Address of shop (Ignore all other information if address's id is provided)",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "type": "string"
+                                },
+                                "city": {
+                                    "type": "string"
+                                },
+                                "town": {
+                                    "type": "string"
+                                },
+                                "address": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "shop"
+                ],
+                "summary": "Update shop of current user",
+                "operationId": "updateMyShop",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of shop",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "slug",
+                        "in": "query",
+                        "description": "Unique string used to identify the shop",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description of shop",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "avatar_image",
+                        "in": "query",
+                        "description": "Avatar image of shop",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "cover_image",
+                        "in": "query",
+                        "description": "Cover image of shop",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "banner",
+                        "in": "query",
+                        "description": "Banners of shop (just fill in image or video field - the image field will be taken if both are provided)",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "image": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "hyper_link": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id"
+                                        ]
+                                    },
+                                    "video": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/shop/products": {
+            "get": {
+                "tags": [
+                    "shop",
+                    "product"
+                ],
+                "summary": "Get products of shop owned by the current user",
+                "operationId": "getMyProducts",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit number of products per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "shop",
+                    "product"
+                ],
+                "summary": "Create product",
+                "operationId": "createProduct",
+                "parameters": [
+                    {
+                        "name": "brand_id",
+                        "in": "query",
+                        "description": "Product brand's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "is_published",
+                        "in": "query",
+                        "description": "Mark as published",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of product",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description of product",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "weight",
+                        "in": "query",
+                        "description": "Weight of product",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "images",
+                        "in": "query",
+                        "description": "Images of product",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "videos",
+                        "in": "query",
+                        "description": "Videos of product",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "attributes",
+                        "in": "query",
+                        "description": "Attributes of product (The attributes must belong to provided categories)",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "attribute_id": {
+                                        "type": "integer"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    },
+                                    "unit": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "attribute_id",
+                                    "value"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "variations",
+                        "in": "query",
+                        "description": "Variations of product (Up to 2 variations)",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "options": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "options"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "category_path",
+                        "in": "query",
+                        "description": "List of category's ids to which product belongs",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "wholesale_prices",
+                        "in": "query",
+                        "description": "Wholesale prices of product (Applied only prices of all models are the same)",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "min": {
+                                        "type": "integer"
+                                    },
+                                    "max": {
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "min",
+                                    "max",
+                                    "price"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "models",
+                        "in": "query",
+                        "description": "Models of product (the number of models is based on the combination of variation's options)",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "sku": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "stock": {
+                                        "type": "integer"
+                                    },
+                                    "variation_index": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "price",
+                                    "stock",
+                                    "variation_index"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/shop/products/{id}": {
+            "put": {
+                "tags": [
+                    "shop",
+                    "product"
+                ],
+                "summary": "Update product",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "brand_id",
+                        "in": "query",
+                        "description": "Product brand's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "is_published",
+                        "in": "query",
+                        "description": "Mark as published",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of product",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description of product",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "weight",
+                        "in": "query",
+                        "description": "Weight of product",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "images",
+                        "in": "query",
+                        "description": "Images of product",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "videos",
+                        "in": "query",
+                        "description": "Videos of product",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "attributes",
+                        "in": "query",
+                        "description": "Attributes of product (The attributes must belong to provided categories)",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "attribute_id": {
+                                        "type": "integer"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    },
+                                    "unit": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "attribute_id",
+                                    "value"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "variations",
+                        "in": "query",
+                        "description": "Variations of product (Up to 2 variations)",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "options": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "options"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "category_path",
+                        "in": "query",
+                        "description": "List of category's ids to which product belongs",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "wholesale_prices",
+                        "in": "query",
+                        "description": "Wholesale prices of product (Applied only prices of all models are the same)",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "min": {
+                                        "type": "integer"
+                                    },
+                                    "max": {
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "min",
+                                    "max",
+                                    "price"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "models",
+                        "in": "query",
+                        "description": "Models of product (the number of models is based on the combination of variation's options)",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "sku": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "stock": {
+                                        "type": "integer"
+                                    },
+                                    "variation_index": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "price",
+                                    "stock",
+                                    "variation_index"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "shop"
+                ],
+                "summary": "Delete product",
+                "operationId": "deleteProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/shop/products/categories/attributes": {
+            "get": {
+                "tags": [
+                    "shop",
+                    "product"
+                ],
+                "summary": "Get all attributes of categories",
+                "operationId": "getCategoriesAttributesForShop",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "List of category's ids",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/shop/products/reviews": {
+            "get": {
+                "tags": [
+                    "shop",
+                    "product"
+                ],
+                "summary": "Get review of the current shop",
+                "operationId": "getShopReviews",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit number of reviews per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/shop/products/reviews/{id}/reply": {
+            "post": {
+                "tags": [
+                    "shop",
+                    "product"
+                ],
+                "summary": "Reply product review",
+                "operationId": "replyReview",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Review's ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "reply",
+                        "in": "query",
+                        "description": "Reply content",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/shop/orders": {
+            "get": {
+                "tags": [
+                    "shop",
+                    "order"
+                ],
+                "summary": "Get orders by status",
+                "operationId": "getShopOrderByStatus",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit number of orders per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "status_id",
+                        "in": "query",
+                        "description": "Order status's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/shop/orders/{id}/ready": {
+            "post": {
+                "tags": [
+                    "shop",
+                    "order"
+                ],
+                "summary": "Mark order as ready",
+                "operationId": "markOrderAsReady",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pickup_address_id",
+                        "in": "query",
+                        "description": "Pickup address's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "Note",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/shop/orders/{id}/cancel": {
+            "post": {
+                "tags": [
+                    "shop",
+                    "order"
+                ],
+                "summary": "Mark order as cancelled",
+                "operationId": "markOrderAsCancelled",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "Note",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/admin/auth/sign-in": {
+            "post": {
+                "tags": [
+                    "admin",
+                    "auth"
+                ],
+                "summary": "Sign in as an admin",
+                "operationId": "adminSignIn",
+                "parameters": [
+                    {
+                        "name": "usernameOrEmail",
+                        "in": "query",
+                        "description": "Username or email of admin",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password of admin",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input or incorrect credentials"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/admin/auth/sign-out": {
+            "post": {
+                "tags": [
+                    "admin",
+                    "auth"
+                ],
+                "summary": "Sign out as an admin",
+                "operationId": "adminSignOut",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/admin/password": {
+            "put": {
+                "tags": [
+                    "admin",
+                    "auth"
+                ],
+                "summary": "Update admin's password",
+                "operationId": "updateAdminPassword",
+                "parameters": [
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Current password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "Confirm current password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "new_password",
+                        "in": "query",
+                        "description": "New password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/admin/password/forgot": {
+            "post": {
+                "tags": [
+                    "admin",
+                    "auth"
+                ],
+                "summary": "Request to send reset-admin-password email",
+                "operationId": "forgotAdminPassword",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of account forgot password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/admin/password/reset": {
+            "post": {
+                "tags": [
+                    "admin",
+                    "auth"
+                ],
+                "summary": "Reset admin's password",
+                "operationId": "resetAdminPassword",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Unique token to reset password (deleted after resetting)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of account reset password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "New password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "passsword_confirmation",
+                        "in": "query",
+                        "description": "Confirm new password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/admin/products/{id}/recovery": {
+            "post": {
+                "tags": [
+                    "admin",
+                    "product"
+                ],
+                "summary": "Recovery deleted product",
+                "operationId": "recoveryProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        },
+        "/admin/products/categories": {
+            "post": {
+                "tags": [
+                    "admin",
+                    "product"
+                ],
+                "summary": "Create, update, and delete categories",
+                "operationId": "manageCategory",
+                "parameters": [
+                    {
+                        "name": "create",
+                        "in": "query",
+                        "description": "Create categories",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "parent_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "cover_image": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "cover_image"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "update",
+                        "in": "query",
+                        "description": "Update categories",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "parent_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "cover_image": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "name",
+                                    "cover_image"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "delete",
+                        "in": "query",
+                        "description": "Delete categories",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/admin/products/categories/{id}/bind-attributes": {
+            "post": {
+                "tags": [
+                    "admin",
+                    "product"
+                ],
+                "summary": "Bind attributes to the category",
+                "operationId": "bindAttributesToCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "binds",
+                        "in": "query",
+                        "description": "List of binds",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "attribute_id": {
+                                        "type": "integer"
+                                    },
+                                    "is_required": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": [
+                                    "attribute_id",
+                                    "is_required"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/admin/products/categories/attributes": {
+            "get": {
+                "tags": [
+                    "admin",
+                    "product"
+                ],
+                "summary": "Get all attributes of categories",
+                "operationId": "getCategoriesAttributesForAdmin",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "List of category's ids",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "admin",
+                    "product"
+                ],
+                "summary": "Create attribute and bind it to the category",
+                "operationId": "createAttribute",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of attribute",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "Units of attribute",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "ID of category bound wiht the attribute",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "is_required",
+                        "in": "query",
+                        "description": "Decide if the attribute is required or optional (must be filled in if category_id is presented)",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/admin/products/categories/attributes/{input}": {
+            "get": {
+                "tags": [
+                    "admin",
+                    "product"
+                ],
+                "summary": "Search attributes",
+                "operationId": "searchAttributes",
+                "parameters": [
+                    {
+                        "name": "input",
+                        "in": "path",
+                        "description": "Keyword of attributes",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/admin/products/categories/attributes/{id}": {
+            "put": {
+                "tags": [
+                    "admin",
+                    "product"
+                ],
+                "summary": "Update attribute",
+                "operationId": "updateAttribute",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Attribute's ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of attribute",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "Units of attribute",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "admin",
+                    "product"
+                ],
+                "summary": "Delete attribute",
+                "operationId": "deleteAttribute",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of attribute",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    },
+                    "403": {
+                        "description": "Unauthorize"
+                    }
+                }
+            }
+        },
+        "/admin/orders/{id}/cancel": {
+            "post": {
+                "tags": [
+                    "admin",
+                    "order"
+                ],
+                "summary": "Mark order as cancelled",
+                "operationId": "markOrderAsCancelledByAdmin",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "Note",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Invliad input"
+                    },
+                    "401": {
+                        "description": "Missing bearer token"
+                    }
+                }
+            }
+        }
+    }
+}
