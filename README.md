@@ -105,7 +105,3 @@ Các file `.env`, dependencies, frontend build, cache và bản backup SQL trong
 
 Giấy phép và thông tin tác giả gốc được giữ trong dự án.
 
-# License
-
-- ##### This project is distributed under the [MIT License](LICENSE).
-- ##### Copyright of [@TP-O](https://github.com/TP-O), 2022.
