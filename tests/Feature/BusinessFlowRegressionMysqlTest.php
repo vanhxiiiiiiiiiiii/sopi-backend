@@ -61,6 +61,57 @@ class BusinessFlowRegressionMysqlTest extends TestCase
         parent::tearDown();
     }
 
+    public function test_cart_insert_update_and_delete_work_without_database_triggers(): void
+    {
+        // A trigger-free temporary table shadows cart_items only on this test
+        // connection and leaves the real cart table and its triggers intact.
+        DB::statement('CREATE TEMPORARY TABLE cart_items (
+            quantity INT UNSIGNED NOT NULL,
+            user_id BIGINT UNSIGNED NOT NULL,
+            shop_id BIGINT UNSIGNED NOT NULL,
+            product_id BIGINT UNSIGNED NOT NULL,
+            product_model_id BIGINT UNSIGNED NOT NULL,
+            cart_id BIGINT UNSIGNED NULL,
+            PRIMARY KEY (user_id, product_model_id)
+        ) ENGINE=InnoDB');
+        try {
+            config(['app.debug' => false]);
+            $this->api('POST', '/user/cart', 'buyer', [
+                ...$this->item(),
+                'user_id' => $this->f['seller']->id,
+                'shop_id' => $this->f['buyer']->id,
+                'product_id' => 0,
+                'cart_id' => 0,
+            ])->assertOk();
+
+            $row = DB::table('cart_items')->where('user_id', $this->f['buyer']->id)->first();
+            $this->assertSame($this->f['shop']->id, (int) $row->shop_id);
+            $this->assertSame($this->f['product']->id, (int) $row->product_id);
+            $this->assertSame($this->f['buyer']->id, (int) DB::table('carts')->where('id', $row->cart_id)->value('user_id'));
+            $this->api('GET', '/user/cart', 'buyer')->assertOk()
+                ->assertJsonPath('data.0.product.id', $this->f['product']->id)
+                ->assertJsonPath('data.0.shop.id', $this->f['shop']->id);
+
+            $this->api('POST', '/user/cart', 'buyer', $this->item(2))->assertOk();
+            $this->assertSame(1, DB::table('cart_items')->count());
+            $this->assertSame(2, (int) DB::table('cart_items')->value('quantity'));
+            $this->api('DELETE', '/user/cart/' . $this->f['model']->id, 'buyer')->assertOk();
+            $this->assertSame(0, DB::table('cart_items')->count());
+            $this->assertSame(10, (int) $this->f['model']->fresh()->stock);
+            $this->assertSame(0, Order::where('user_id', $this->f['buyer']->id)->count());
+        } finally {
+            DB::statement('DROP TEMPORARY TABLE IF EXISTS cart_items');
+        }
+    }
+
+    public function test_cart_inventory_validation_keeps_422_in_production(): void
+    {
+        config(['app.debug' => false]);
+        $this->api('POST', '/user/cart', 'buyer', $this->item(11))
+            ->assertUnprocessable()->assertJsonValidationErrors('quantity');
+        $this->assertSame(0, DB::table('cart_items')->where('user_id', $this->f['buyer']->id)->count());
+    }
+
     public function test_blocked_and_inactive_customers_cannot_login_or_use_existing_tokens(): void
     {
         $password = Str::random(25);

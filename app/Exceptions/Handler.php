@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
@@ -41,6 +43,13 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (Throwable $e) {
+            // Let Laravel preserve validation responses and authentication status codes.
+            if ($e instanceof HttpResponseException
+                || $e instanceof ValidationException
+                || $e instanceof AuthenticationException) {
+                return null;
+            }
+
             if ($e instanceof HttpException) {
                 $message = $e->getStatusCode() !== 404
                     ? $e->getMessage()

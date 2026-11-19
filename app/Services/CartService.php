@@ -56,7 +56,16 @@ class CartService
             if ($item->exists()) {
                 $item->update(['quantity' => $data['quantity'], 'cart_id' => $cartId]);
             } else {
-                CartItem::create([...$data, 'user_id' => $userId, 'cart_id' => $cartId]);
+                // Derive ownership from the selected model; cloud databases may
+                // not support the legacy trigger that fills these required IDs.
+                CartItem::create([
+                    'cart_id' => $cartId,
+                    'user_id' => $userId,
+                    'shop_id' => $model->product->shop_id,
+                    'product_id' => $model->product_id,
+                    'product_model_id' => $model->id,
+                    'quantity' => $data['quantity'],
+                ]);
             }
 
             $price = $model->unitPriceFor($data['quantity']);
