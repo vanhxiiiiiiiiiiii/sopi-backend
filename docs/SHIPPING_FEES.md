@@ -3,6 +3,13 @@
 ## Thiết lập và sử dụng
 
 - Chạy `php artisan migrate` sau khi cập nhật backend.
+- Với Docker trên Render, `render-start.sh` tự áp dụng hai migration vận chuyển
+  `2026_11_19_000002` và `2026_11_19_000003` trước khi chạy Apache. Bước này bổ sung
+  bảng biểu phí, tọa độ nhận hàng, snapshot phí trên đơn và cho phép bỏ quận/huyện.
+  Database TiDB nhập từ SQL không cần chạy lại các migration trigger MySQL cũ.
+  Migration có thể tiếp tục với bảng/cột đã nhập một phần; không ghi đè biểu phí
+  hoặc dữ liệu địa chỉ đã có. Nếu nâng cấp thất bại, container báo lỗi thay vì
+  phục vụ trang thanh toán với database chưa đủ cấu trúc.
 - Super Admin hoặc Admin vận chuyển mở frontend `/admin/shipping/rates` để chỉnh kho và biểu phí.
 - Kho khởi tạo: 96A Trần Phú, Hà Đông, Hà Nội; tọa độ OSM 20.9809427, 105.7870861. Admin có thể kéo ghim tới cổng/khu vực xe lấy hàng thực tế.
 - Người mua chọn địa chỉ đã có tọa độ, chọn một kết quả tìm kiếm, nhấn trên bản đồ hoặc kéo ghim: tuyến đường, phí và tổng tiền tự cập nhật. Không có bước bấm tính lại. Địa chỉ chưa có tọa độ cần chọn một vị trí; có thể xem phí ngay khi đang nhập địa chỉ mới, trước khi lưu địa chỉ.
