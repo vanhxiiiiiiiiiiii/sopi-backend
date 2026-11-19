@@ -14,6 +14,7 @@ use Tests\TestCase;
 
 class CheckoutMysqlTest extends TestCase
 {
+    use \Tests\Concerns\UsesShippingRoutes;
     public function test_cod_checkout_commits_inventory_once_and_tracks_delivery(): void
     {
         if (getenv('RUN_MYSQL_CHECKOUT_TESTS') !== '1' || DB::getDriverName() !== 'mysql') {
@@ -22,11 +23,13 @@ class CheckoutMysqlTest extends TestCase
 
         DB::beginTransaction();
         try {
+            $this->fakeShippingRoutes();
             $buyer = $this->account();
             $seller = $this->account();
             $other = $this->account();
             Shop::create(['id' => $seller->id, 'name' => 'Checkout fixture', 'slug' => Str::uuid()->toString()]);
             $address = Address::create([
+                'latitude' => 20.99, 'longitude' => 105.8,
                 'full_name' => 'Test Recipient', 'phone' => '0901234567', 'address' => '1 Test Street',
                 'town' => 'Test Ward', 'city' => 'Test District', 'state' => 'Test Province',
             ]);
@@ -48,22 +51,22 @@ class CheckoutMysqlTest extends TestCase
             $this->api('POST', '/user/cart', $buyerToken, [...$item, 'quantity' => 4])->assertUnprocessable();
             $this->api('GET', '/user/cart', $buyerToken)->assertOk()
                 ->assertJsonPath('data.0.quantity', 2)->assertJsonPath('data.0.final_total_price', 25);
-            $this->api('POST', '/user/orders/quote', $buyerToken)->assertOk()->assertJsonPath('data.payment_total', 25);
+            $this->api('POST', '/user/orders/quote', $buyerToken, ['address_id' => $address->id])->assertOk()->assertJsonPath('data.payment_total', 27.7);
             $this->api('POST', '/user/orders', $buyerToken, [...$payload, 'voucher_code' => 'MISSING-VOUCHER'])->assertUnprocessable();
             $this->assertSame(3, (int) $model->fresh()->stock);
             $this->api('GET', '/user/cart', $buyerToken)->assertJsonCount(1, 'data');
 
             $unselected = $product->models()->create(['price' => 8.00, 'stock' => 4, 'variation_index' => []]);
             $this->api('POST', '/user/cart', $buyerToken, ['product_model_id' => $unselected->id, 'quantity' => 1])->assertOk();
-            $this->api('POST', '/user/orders/quote', $buyerToken, ['model_ids' => [$model->id]])
-                ->assertOk()->assertJsonPath('data.payment_total', 25);
+            $this->api('POST', '/user/orders/quote', $buyerToken, ['model_ids' => [$model->id], 'address_id' => $address->id])
+                ->assertOk()->assertJsonPath('data.payment_total', 27.7);
 
             $created = $this->api('POST', '/user/orders', $buyerToken, $payload)->assertCreated()
                 ->assertJsonPath('data.0.status_id', 1)->assertJsonPath('data.0.payments.0.status', 'pending')
                 ->assertJsonPath('data.0.recipient_snapshot.full_name', 'Test Recipient');
             $id = $created->json('data.0.id');
             $paymentId = $created->json('data.0.payments.0.id');
-            $this->assertSame(25.0, (float) $created->json('data.0.payment_total'));
+            $this->assertSame(27.7, (float) $created->json('data.0.payment_total'));
             $this->assertSame(1, (int) $model->fresh()->stock);
             $this->api('GET', '/user/cart', $buyerToken)->assertJsonCount(1, 'data')
                 ->assertJsonPath('data.0.product_model_id', $unselected->id);

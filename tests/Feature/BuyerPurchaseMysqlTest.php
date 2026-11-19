@@ -14,6 +14,7 @@ use Tests\TestCase;
 
 class BuyerPurchaseMysqlTest extends TestCase
 {
+    use \Tests\Concerns\UsesShippingRoutes;
     private bool $transactionStarted = false;
     private array $f;
 
@@ -25,12 +26,13 @@ class BuyerPurchaseMysqlTest extends TestCase
         }
         DB::beginTransaction();
         $this->transactionStarted = true;
+        $this->fakeShippingRoutes();
         $buyer = $this->account();
         $seller = $this->account();
         $other = $this->account();
         Shop::create(['id' => $seller->id, 'name' => 'Purchase test shop', 'slug' => Str::uuid()->toString()]);
         $shop = Shop::findOrFail($seller->id);
-        $address = Address::create(['full_name' => 'Purchase test recipient', 'phone' => '0901234567',
+        $address = Address::create(['latitude' => 20.99, 'longitude' => 105.8, 'full_name' => 'Purchase test recipient', 'phone' => '0901234567',
             'address' => 'Test street', 'town' => 'Test ward', 'city' => 'Test city', 'state' => 'Test province']);
         $buyer->addresses()->attach($address);
         $products = collect([1, 2])->map(fn ($i) => Product::create([
@@ -93,7 +95,7 @@ class BuyerPurchaseMysqlTest extends TestCase
         }
         $this->assertEquals($stock, $model->fresh()->stock);
         $this->assertSame(1, Order::where('user_id', $this->f['buyer']->id)->count());
-        $this->assertEquals(50, $order->fresh()->payment_total);
+        $this->assertEquals(52.7, $order->fresh()->payment_total);
         $this->assertSame(4, (int) $order->fresh()->status_id);
     }
 

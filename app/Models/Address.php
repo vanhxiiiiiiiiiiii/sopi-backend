@@ -17,6 +17,8 @@ class Address extends Model
         'town',
         'address',
         'is_home',
+        'latitude',
+        'longitude',
     ];
 
     protected $hidden = [

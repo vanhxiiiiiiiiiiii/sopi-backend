@@ -43,7 +43,7 @@ class AdminRolesMysqlTest extends TestCase
     public function test_the_three_roles_enforce_the_complete_read_access_matrix(): void
     {
         $paths = ['me' => 'all', 'overview' => 'all', 'roles' => 'super_admin', 'administrators' => 'super_admin', 'activity' => 'super_admin',
-            'shipping/providers' => 'logistics_admin', 'shipping/staff' => 'logistics_admin', 'shipments' => 'logistics_admin', 'shipments/dashboard' => 'logistics_admin',
+            'shipping/providers' => 'logistics_admin', 'shipping/staff' => 'logistics_admin', 'shipping/rates' => 'logistics_admin', 'shipments' => 'logistics_admin', 'shipments/dashboard' => 'logistics_admin',
             'customers' => 'commerce_admin', 'sellers' => 'commerce_admin', 'seller-applications' => 'commerce_admin', 'products' => 'commerce_admin',
             'orders' => 'commerce_admin', 'payments' => 'commerce_admin', 'vouchers' => 'commerce_admin', 'reports/monthly-revenue' => 'commerce_admin'];
         foreach (array_keys($this->accounts) as $role) {

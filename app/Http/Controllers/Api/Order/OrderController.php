@@ -135,10 +135,15 @@ class OrderController extends Controller
             'voucher_code' => 'nullable|string|max:50',
             'model_ids' => 'sometimes|array|min:1|max:100',
             'model_ids.*' => 'required|integer|min:1|distinct',
+            'address_id' => 'nullable|required_without:delivery_location|integer|min:1',
+            'delivery_location' => 'sometimes|array:latitude,longitude|required_array_keys:latitude,longitude',
+            'delivery_location.latitude' => 'required_with:delivery_location|numeric|between:8,24',
+            'delivery_location.longitude' => 'required_with:delivery_location|numeric|between:102,110',
         ]);
 
         return response()->json(['status' => true,
-            'data' => $this->orderService->quote($request->user()->id, $data['voucher_code'] ?? null, $data['model_ids'] ?? null)]);
+            'data' => $this->orderService->quote($request->user()->id, $data['voucher_code'] ?? null, $data['model_ids'] ?? null,
+                $data['address_id'] ?? null, $data['delivery_location'] ?? null)]);
     }
 
     public function buyAgain(Request $request, int $order)

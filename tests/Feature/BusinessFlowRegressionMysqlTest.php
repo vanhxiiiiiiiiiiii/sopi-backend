@@ -24,6 +24,7 @@ use Tests\TestCase;
 
 class BusinessFlowRegressionMysqlTest extends TestCase
 {
+    use \Tests\Concerns\UsesShippingRoutes;
     private bool $transactionStarted = false;
     private array $f;
 
@@ -35,11 +36,12 @@ class BusinessFlowRegressionMysqlTest extends TestCase
         }
         DB::beginTransaction();
         $this->transactionStarted = true;
+        $this->fakeShippingRoutes();
         $buyer = $this->account();
         $seller = $this->account();
         Shop::create(['id' => $seller->id, 'name' => 'Business regression shop', 'slug' => Str::uuid()->toString()]);
         $shop = Shop::findOrFail($seller->id);
-        $address = Address::create(['full_name' => 'Test recipient', 'phone' => '0901234567',
+        $address = Address::create(['latitude' => 20.99, 'longitude' => 105.8, 'full_name' => 'Test recipient', 'phone' => '0901234567',
             'address' => 'Test street', 'town' => 'Ward', 'city' => 'District', 'state' => 'Province']);
         $buyer->addresses()->attach($address);
         $product = Product::create(['name' => 'Regression ' . Str::random(12), 'shop_id' => $seller->id, 'status_id' => 1, 'weight' => 100]);
@@ -120,10 +122,10 @@ class BusinessFlowRegressionMysqlTest extends TestCase
     public function test_suspending_a_shop_invalidates_existing_cart_quote_and_checkout_without_side_effects(): void
     {
         $this->addCart();
-        $this->api('POST', '/user/orders/quote', 'buyer')->assertOk();
+        $this->api('POST', '/user/orders/quote', 'buyer', ['address_id' => $this->f['address']->id])->assertOk();
         $this->api('PUT', '/admin/sellers/' . $this->f['seller']->id, 'admin', ['is_active' => false])->assertOk();
         $this->api('GET', '/user/cart', 'buyer')->assertOk()->assertJsonPath('data.0.unavailable_reason', 'Cửa hàng đã ngừng hoạt động.');
-        $this->api('POST', '/user/orders/quote', 'buyer')->assertUnprocessable();
+        $this->api('POST', '/user/orders/quote', 'buyer', ['address_id' => $this->f['address']->id])->assertUnprocessable();
         $this->api('POST', '/user/orders', 'buyer', $this->payload())->assertUnprocessable();
         $this->api('POST', '/user/cart', 'buyer', $this->item())->assertUnprocessable();
         $this->assertSame(10, (int) $this->f['model']->fresh()->stock);

@@ -37,6 +37,8 @@ Route::prefix('v2')->namespace('Api')->group(function () {
     Route::middleware('allow:' . User::class)->group(function () {
         // User endpoints
         Route::prefix('user')->group(function () {
+            Route::get('/shipping/settings', 'ShippingRateController@show')->middleware('auth:sanctum');
+            Route::post('/shipping/search', 'ShippingRateController@search')->middleware(['auth:sanctum', 'throttle:20,1']);
             Route::prefix('auth')->namespace('Auth')->group(function () {
                 Route::post('/sign-up', 'SignUpController@signUp')
                     ->withoutMiddleware('allow:' . User::class);
@@ -189,6 +191,9 @@ Route::prefix('v2')->namespace('Api')->group(function () {
         Route::get('/orders', 'AdminCommerceController@orders');
         Route::get('/payments', 'AdminCommerceController@payments');
         Route::get('/shipping/providers', 'DeliveryManagementController@providers');
+        Route::get('/shipping/rates', 'ShippingRateController@show');
+        Route::put('/shipping/rates', 'ShippingRateController@update');
+        Route::post('/shipping/search', 'ShippingRateController@search')->middleware('throttle:20,1');
         Route::post('/shipping/providers', 'DeliveryManagementController@saveProvider');
         Route::put('/shipping/providers/{id}', 'DeliveryManagementController@saveProvider');
         Route::get('/shipping/staff', 'DeliveryManagementController@staff');

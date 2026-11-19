@@ -18,6 +18,7 @@ use Tests\TestCase;
 
 class DeliveryPaymentMysqlTest extends TestCase
 {
+    use \Tests\Concerns\UsesShippingRoutes;
     private bool $transactionStarted = false;
     private array $f;
 
@@ -29,10 +30,11 @@ class DeliveryPaymentMysqlTest extends TestCase
         }
         DB::beginTransaction();
         $this->transactionStarted = true;
+        $this->fakeShippingRoutes();
         $buyer = $this->user();
         $seller = $this->user();
         Shop::create(['id' => $seller->id, 'name' => 'Delivery fixture', 'slug' => Str::uuid()->toString()]);
-        $address = Address::create(['full_name' => 'Người nhận kiểm thử', 'phone' => '0901234567', 'address' => '1 Đường kiểm thử', 'town' => 'Phường', 'city' => 'Quận', 'state' => 'Tỉnh']);
+        $address = Address::create(['latitude' => 20.99, 'longitude' => 105.8, 'full_name' => 'Người nhận kiểm thử', 'phone' => '0901234567', 'address' => '1 Đường kiểm thử', 'town' => 'Phường', 'city' => 'Quận', 'state' => 'Tỉnh']);
         $buyer->addresses()->attach($address);
         $seller->addresses()->attach($address);
         $product = Product::create(['name' => 'Sản phẩm kiểm thử', 'shop_id' => $seller->id, 'status_id' => 1, 'weight' => 100]);
@@ -115,7 +117,7 @@ class DeliveryPaymentMysqlTest extends TestCase
         $this->api('GET', '/shop/orders?limit=10', 'seller')->assertOk()->assertJsonPath('data.data.0.shipment.status', 'DELIVERED');
         $bad = $this->change(null, $shipment['version']) + ['amount' => 24, 'receipt_reference' => 'TEST-RECEIPT', 'cash_received' => true];
         $this->api('POST', '/delivery/shipments/' . $shipment['id'] . '/collect-cod', 'staff', $bad)->assertUnprocessable();
-        $cod = $this->change(null, $shipment['version']) + ['amount' => 25, 'receipt_reference' => 'TEST-RECEIPT', 'cash_received' => true];
+        $cod = $this->change(null, $shipment['version']) + ['amount' => 27.7, 'receipt_reference' => 'TEST-RECEIPT', 'cash_received' => true];
         $this->api('POST', '/delivery/shipments/' . $shipment['id'] . '/collect-cod', 'staff', $cod)->assertOk()->assertJsonPath('data.order.payment_status', 'paid');
         $this->api('POST', '/delivery/shipments/' . $shipment['id'] . '/collect-cod', 'staff', $cod)->assertOk();
         $this->assertSame(1, DB::table('cod_collections')->where('shipment_id', $shipment['id'])->count());
@@ -206,7 +208,7 @@ class DeliveryPaymentMysqlTest extends TestCase
         $payload['orders'][] = ['product_model_id' => $model->id, 'quantity' => 1];
         $orders = $this->api('POST', '/user/orders', 'buyer', $payload)->assertCreated()->assertJsonCount(2, 'data')->json('data');
         $this->api('POST', '/user/orders', 'buyer', $payload)->assertCreated()->assertJsonCount(2, 'data');
-        $this->assertEquals(33, collect($orders)->sum('payment_total'));
+        $this->assertEquals(38.4, collect($orders)->sum('payment_total'));
         $this->assertSame(1, (int) $model->fresh()->stock);
         foreach ($orders as $order) {
             $actor = (int) $order['shop_id'] === $this->f['seller']->id ? 'seller' : 'secondSeller';
@@ -243,7 +245,7 @@ class DeliveryPaymentMysqlTest extends TestCase
         $this->assertStringContainsString('Nhân viên trước: ' . $this->f['staff']->id, $history->note);
         $this->assertSame(1, Order::findOrFail($order['id'])->progresses()->where('status_id', 4)->count());
         $this->assertSame(1, (int) $this->f['model']->fresh()->stock);
-        $cod = $this->change(null, $shipment['version']) + ['amount' => 25, 'receipt_reference' => 'RECOVERY-RECEIPT', 'cash_received' => true];
+        $cod = $this->change(null, $shipment['version']) + ['amount' => 27.7, 'receipt_reference' => 'RECOVERY-RECEIPT', 'cash_received' => true];
         $this->api('POST', '/delivery/shipments/' . $shipment['id'] . '/collect-cod', 'staff', $cod)->assertForbidden();
         $this->api('POST', '/delivery/shipments/' . $shipment['id'] . '/collect-cod', 'otherStaff', [...$cod, 'amount' => 24])->assertUnprocessable();
         $this->api('POST', '/delivery/shipments/' . $shipment['id'] . '/collect-cod', 'otherStaff', $cod)->assertOk()->assertJsonPath('data.order.payment_status', 'paid');
@@ -266,7 +268,7 @@ class DeliveryPaymentMysqlTest extends TestCase
             $this->change(null, $shipment['version']) + ['shipper_id' => $this->f['otherStaff']->id, 'note' => 'Đơn vị cũ ngừng hoạt động, bàn giao đối soát COD.'])
             ->assertOk()->assertJsonPath('data.status', 'DELIVERED')->assertJsonPath('data.shipping_provider_id', $provider->id)->json('data');
         $this->api('POST', '/delivery/shipments/' . $shipment['id'] . '/collect-cod', 'otherStaff',
-            $this->change(null, $shipment['version']) + ['amount' => 25, 'receipt_reference' => 'CARRIER-RECOVERY', 'cash_received' => true])
+            $this->change(null, $shipment['version']) + ['amount' => 27.7, 'receipt_reference' => 'CARRIER-RECOVERY', 'cash_received' => true])
             ->assertOk()->assertJsonPath('data.order.payment_status', 'paid');
         $this->assertSame(4, (int) Order::findOrFail($order['id'])->status_id);
         $this->assertSame(1, (int) $this->f['model']->fresh()->stock);

@@ -31,6 +31,7 @@ class Order extends Model
         'grand_total',
         'subtotal',
         'shipping_fee',
+        'shipping_snapshot',
         'discount_amount',
         'payment_total',
         'commission_rate',
@@ -41,6 +42,7 @@ class Order extends Model
     protected $casts = [
         'variations' => 'array',
         'recipient_snapshot' => 'array',
+        'shipping_snapshot' => 'array',
         'stock_committed_at' => 'datetime',
     ];
 

@@ -113,6 +113,12 @@ class AddressService
     {
         $address = Address::findOrFail($addressId);
 
+        // A pin for the previous address must not silently survive a location edit.
+        if (!array_key_exists('latitude', $addressData) && collect(['address', 'town', 'city', 'state'])
+            ->contains(fn ($field) => array_key_exists($field, $addressData) && $addressData[$field] !== $address->$field)) {
+            $addressData['latitude'] = $addressData['longitude'] = null;
+        }
+
         $address->update(Arr::except($addressData, [
             'is_pickup_address',
             'is_return_address',

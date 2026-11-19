@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\OrderStatus;
 use App\Enums\ProductStatus;
 use App\Models\Account\User\User;
+use App\Models\Address;
 use App\Models\Order\CartItem;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Order\Order;
@@ -18,11 +19,11 @@ use Illuminate\Validation\ValidationException;
 
 class OrderService
 {
-    public function __construct(private OrderWorkflowService $workflow, private CartService $cart, private \App\Services\Payments\PaymentMethodService $paymentMethods)
+    public function __construct(private OrderWorkflowService $workflow, private CartService $cart, private \App\Services\Payments\PaymentMethodService $paymentMethods, private ShippingService $shipping)
     {
     }
 
-    public function quote(int $userId, ?string $voucherCode, ?array $modelIds = null): array
+    public function quote(int $userId, ?string $voucherCode, ?array $modelIds = null, ?int $addressId = null, ?array $location = null): array
     {
         $items = $this->cart->getItems($userId);
         if ($modelIds !== null) {
@@ -34,16 +35,34 @@ class OrderService
         if ($items->isEmpty() || $items->contains(fn ($item) => $item->unavailable_reason !== null)) {
             throw ValidationException::withMessages(['orders' => 'Giỏ hàng rỗng hoặc có sản phẩm không khả dụng.']);
         }
+        if ($items->contains(fn ($item) => (float) $item->product->weight <= 0)) {
+            throw ValidationException::withMessages(['orders' => 'Sản phẩm cần có cân nặng hợp lệ để tính phí giao hàng.']);
+        }
         $subtotal = round($items->sum('final_total_price'), 2);
         $firstShop = $items->first()->shop_id;
         $firstSubtotal = round($items->where('shop_id', $firstShop)->sum('final_total_price'), 2);
         $discount = $this->calculateDiscount($this->resolveVoucher($userId, $voucherCode, false), $firstSubtotal);
+        $user = User::findOrFail($userId);
+        $user->ensureActive();
+        $address = $addressId ? $user->addresses()->where('addresses.id', $addressId)->first() : new Address();
+        if (!$address || (!$addressId && !$location)) throw ValidationException::withMessages(['address_id' => 'Hãy chọn địa chỉ giao hàng của bạn.']);
+        if ($location !== null) $address->fill($location);
+        $settings = $this->shipping->settings();
+        $route = $this->shipping->route($address, $settings);
+        $details = $items->groupBy('shop_id')->map(function ($shopItems, $shopId) use ($route, $settings) {
+            $weight = $shopItems->sum(fn ($item) => (float) $item->product->weight * $item->quantity);
+            return ['shop_id' => (int) $shopId, 'shop_name' => $shopItems->first()->shop->name,
+                ...$this->shipping->fee(round($shopItems->sum('final_total_price'), 2), $weight, $route, $settings)];
+        })->values();
+        $shippingFee = round($details->sum('fee'), 2);
 
         return [
             'subtotal' => $subtotal,
-            'shipping_fee' => 0,
+            'shipping_fee' => $shippingFee,
+            'shipping_details' => $details,
+            'shipping_route' => $route,
             'discount_amount' => $discount,
-            'payment_total' => round($subtotal - $discount, 2),
+            'payment_total' => round($subtotal + $shippingFee - $discount, 2),
         ];
     }
 
@@ -54,17 +73,23 @@ class OrderService
             $user->ensureActive();
             $requestedItems = collect($orderData['orders'])->mapWithKeys(fn ($item) =>
                 [(int) $item['product_model_id'] => (int) $item['quantity']])->sortKeys(SORT_NUMERIC);
-            $hash = hash('sha256', json_encode([
+            $hashData = [
                 $requestedItems->all(), (int) $orderData['address_id'], $orderData['voucher_code'] ?? null,
                 $orderData['payment_method'], $orderData['payment_method_id'] ?? null,
-            ], JSON_THROW_ON_ERROR));
+            ];
+            if (isset($orderData['delivery_location'])) {
+                $hashData[] = array_map(fn ($value) => number_format((float) $value, 7, '.', ''), [
+                    $orderData['delivery_location']['latitude'], $orderData['delivery_location']['longitude'],
+                ]);
+            }
+            $hash = hash('sha256', json_encode($hashData, JSON_THROW_ON_ERROR));
             $receiptKey = ['user_id' => $userId, 'request_key' => $orderData['request_key']];
             $receipt = DB::table('checkout_receipts')->where($receiptKey)->first();
             if ($receipt) {
                 $legacyHash = hash('sha256', json_encode([
                     $requestedItems->all(), (int) $orderData['address_id'], $orderData['voucher_code'] ?? null,
                 ], JSON_THROW_ON_ERROR));
-                $legacyCod = $orderData['payment_method'] === 'cod' && empty($orderData['payment_method_id'])
+                $legacyCod = !isset($orderData['delivery_location']) && $orderData['payment_method'] === 'cod' && empty($orderData['payment_method_id'])
                     && hash_equals($receipt->payload_hash, $legacyHash);
                 if (!hash_equals($receipt->payload_hash, $hash) && !$legacyCod) {
                     throw ValidationException::withMessages(['request_key' => 'Mã đặt hàng đã được dùng với nội dung khác.']);
@@ -82,18 +107,23 @@ class OrderService
                 throw ValidationException::withMessages(['orders' => 'Giỏ hàng đã thay đổi. Hãy tải lại và kiểm tra trước khi đặt hàng.']);
             }
 
-            $address = $user->addresses()->where('addresses.id', $orderData['address_id'])->first();
+            $address = $user->addresses()->where('addresses.id', $orderData['address_id'])->lockForUpdate()->first();
             if (!$address) {
                 throw ValidationException::withMessages(['address_id' => 'Hãy chọn địa chỉ giao hàng của bạn.']);
             }
+            if (isset($orderData['delivery_location'])) $address->fill($orderData['delivery_location']);
             $recipient = Validator::make($address->only(['full_name', 'phone', 'address', 'town', 'city', 'state']), [
                 'full_name' => 'required|string|max:64',
                 'phone' => 'required|digits_between:10,11',
                 'address' => 'required|string',
                 'town' => 'required|string',
-                'city' => 'required|string',
+                'city' => 'nullable|string',
                 'state' => 'required|string',
             ])->validate();
+            $recipient['latitude'] = $address->latitude;
+            $recipient['longitude'] = $address->longitude;
+            $shippingSettings = $this->shipping->settings(true);
+            $shippingRoute = $this->shipping->route($address, $shippingSettings);
 
             $modelIds = $requestedItems->keys();
 
@@ -116,6 +146,9 @@ class OrderService
             $items = $modelIds->map(function ($modelId) use ($models, $requestedItems, $shops) {
                 $model = $models[$modelId];
                 $quantity = $requestedItems[$modelId];
+                if ((float) $model->product?->weight <= 0) {
+                    throw ValidationException::withMessages(['orders' => 'Sản phẩm cần có cân nặng hợp lệ để tính phí giao hàng.']);
+                }
                 if (!$shops->get($model->product?->shop_id)?->is_active
                     || (int) $model->product->status_id !== ProductStatus::Published->value
                     || $quantity > $model->availableQuantity()) {
@@ -137,15 +170,25 @@ class OrderService
                     'quantity' => $quantity,
                     'unit_price' => round($unitPrice, 2),
                     'line_total' => round($unitPrice * $quantity, 2),
+                    'shipping_weight_grams' => (float) $model->product->weight * $quantity,
                 ];
             })->groupBy('shop_id');
 
             $voucher = $this->resolveVoucher($userId, $orderData['voucher_code'] ?? null);
+            $shippingDetails = $items->map(fn ($shopItems) => $this->shipping->fee(
+                round((float) $shopItems->sum('line_total'), 2), (float) $shopItems->sum('shipping_weight_grams'), $shippingRoute, $shippingSettings));
+            $expectedTotal = round($items->flatten(1)->sum('line_total') + $shippingDetails->sum('fee')
+                - $this->calculateDiscount($voucher, round((float) $items->first()->sum('line_total'), 2)), 2);
+            if (isset($orderData['expected_payment_total']) && abs((float) $orderData['expected_payment_total'] - $expectedTotal) > 0.001) {
+                throw ValidationException::withMessages(['expected_payment_total' => 'Giá hoặc phí vận chuyển đã thay đổi. Hãy tính lại tổng tiền và xác nhận trước khi đặt hàng.']);
+            }
+            if ($address->isDirty(['latitude', 'longitude'])) $address->save();
             $createdOrders = collect();
 
             foreach ($items as $shopId => $shopItems) {
                 $subtotal = round((float) $shopItems->sum('line_total'), 2);
-                $shippingFee = 0;
+                $shippingDetail = $shippingDetails[$shopId];
+                $shippingFee = $shippingDetail['fee'];
                 $orderVoucher = $createdOrders->isEmpty() ? $voucher : null;
                 $discount = $this->calculateDiscount($orderVoucher, $subtotal);
                 $paymentTotal = max(0, round($subtotal + $shippingFee - $discount, 2));
@@ -171,13 +214,14 @@ class OrderService
                     'grand_total' => $paymentTotal,
                     'subtotal' => $subtotal,
                     'shipping_fee' => $shippingFee,
+                    'shipping_snapshot' => [...$shippingDetail, 'destination_latitude' => $address->latitude, 'destination_longitude' => $address->longitude],
                     'discount_amount' => $discount,
                     'payment_total' => $paymentTotal,
                     'commission_rate' => $commissionRate,
-                    'commission_amount' => round($paymentTotal * $commissionRate / 100, 2),
+                    'commission_amount' => round(($subtotal - $discount) * $commissionRate / 100, 2),
                 ]);
 
-                $order->items()->createMany($shopItems->map(fn ($item) => collect($item)->except('shop_id')->all())->all());
+                $order->items()->createMany($shopItems->map(fn ($item) => collect($item)->except(['shop_id', 'shipping_weight_grams'])->all())->all());
                 $this->workflow->deductInventory($order);
                 $order->progresses()->create([
                     'status_id' => OrderStatus::Processing->value,
