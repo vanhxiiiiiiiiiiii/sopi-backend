@@ -92,16 +92,3 @@ git push -u origin HEAD:main
 ```
 
 Các file `.env`, dependencies, frontend build, cache và bản backup SQL trong `storage/app` được bỏ qua bởi Git. File SQL mẫu nằm ở [database/eshopee-report-queries.sql](database/eshopee-report-queries.sql).
-
-## Tài liệu và nguồn gốc
-
-- [Yêu cầu và thiết kế MySQL](docs/MYSQL_REQUIREMENTS.md)
-- [Truy vấn SQL mẫu](database/eshopee-report-queries.sql)
-- [Tài liệu API](docs/index.html)
-- [Hạ tầng Kubernetes cục bộ](.infrastructure/local/README.md)
-- [Hạ tầng Azure](.infrastructure/azure)
-- Backend phát triển từ [TP-O/e-commerce-api](https://github.com/TP-O/e-commerce-api).
-- Frontend phát triển từ [thuongtruong1009/e-shopee](https://github.com/thuongtruong1009/e-shopee).
-
-Giấy phép và thông tin tác giả gốc được giữ trong dự án.
-
