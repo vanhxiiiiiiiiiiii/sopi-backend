@@ -1,0 +1,3448 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "ent_seller_applications",
+        "type": "Entity",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "data": {
+          "label": "seller_applications",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_seller_applications_attr_0",
+        "parentId": "ent_seller_applications",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_seller_applications_attr_1",
+        "parentId": "ent_seller_applications",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "name",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_seller_applications_attr_2",
+        "parentId": "ent_seller_applications",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "tax_code",
+          "types": {
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_seller_applications_attr_3",
+        "parentId": "ent_seller_applications",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "status",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shops",
+        "type": "Entity",
+        "position": {
+          "x": 500,
+          "y": 0
+        },
+        "data": {
+          "label": "shops",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shops_attr_0",
+        "parentId": "ent_shops",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shops_attr_1",
+        "parentId": "ent_shops",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "seller_code",
+          "types": {
+            "Unique": true,
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shops_attr_2",
+        "parentId": "ent_shops",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "name",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shops_attr_3",
+        "parentId": "ent_shops",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "is_active",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_warehouses",
+        "type": "Entity",
+        "position": {
+          "x": 1000,
+          "y": 0
+        },
+        "data": {
+          "label": "warehouses",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_warehouses_attr_0",
+        "parentId": "ent_warehouses",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_warehouses_attr_1",
+        "parentId": "ent_warehouses",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "warehouse_code",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_warehouses_attr_2",
+        "parentId": "ent_warehouses",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "name",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_warehouses_attr_3",
+        "parentId": "ent_warehouses",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "is_active",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_stocks",
+        "type": "Entity",
+        "position": {
+          "x": 1500,
+          "y": 0
+        },
+        "data": {
+          "label": "inventory_stocks",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_stocks_attr_0",
+        "parentId": "ent_inventory_stocks",
+        "type": "Attribute",
+        "position": {
+          "x": -130,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_stocks_attr_1",
+        "parentId": "ent_inventory_stocks",
+        "type": "Attribute",
+        "position": {
+          "x": 0,
+          "y": -88
+        },
+        "data": {
+          "label": "quantity",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_stocks_attr_2",
+        "parentId": "ent_inventory_stocks",
+        "type": "Attribute",
+        "position": {
+          "x": 130,
+          "y": -88
+        },
+        "data": {
+          "label": "reserved_quantity",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_price_histories",
+        "type": "Entity",
+        "position": {
+          "x": 2000,
+          "y": 0
+        },
+        "data": {
+          "label": "product_price_histories",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_price_histories_attr_0",
+        "parentId": "ent_product_price_histories",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_price_histories_attr_1",
+        "parentId": "ent_product_price_histories",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "old_price",
+          "types": {
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_price_histories_attr_2",
+        "parentId": "ent_product_price_histories",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "new_price",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_price_histories_attr_3",
+        "parentId": "ent_product_price_histories",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "effective_at",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_categories",
+        "type": "Entity",
+        "position": {
+          "x": 2500,
+          "y": 0
+        },
+        "data": {
+          "label": "product_categories",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_categories_attr_0",
+        "parentId": "ent_product_categories",
+        "type": "Attribute",
+        "position": {
+          "x": -130,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_categories_attr_1",
+        "parentId": "ent_product_categories",
+        "type": "Attribute",
+        "position": {
+          "x": 0,
+          "y": -88
+        },
+        "data": {
+          "label": "name",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_categories_attr_2",
+        "parentId": "ent_product_categories",
+        "type": "Attribute",
+        "position": {
+          "x": 130,
+          "y": -88
+        },
+        "data": {
+          "label": "parent_id",
+          "types": {
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_users",
+        "type": "Entity",
+        "position": {
+          "x": 0,
+          "y": 460
+        },
+        "data": {
+          "label": "users",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_users_attr_0",
+        "parentId": "ent_users",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_users_attr_1",
+        "parentId": "ent_users",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "username",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_users_attr_2",
+        "parentId": "ent_users",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "email",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_users_attr_3",
+        "parentId": "ent_users",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "account_status",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_carts",
+        "type": "Entity",
+        "position": {
+          "x": 500,
+          "y": 460
+        },
+        "data": {
+          "label": "carts",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_carts_attr_0",
+        "parentId": "ent_carts",
+        "type": "Attribute",
+        "position": {
+          "x": -65,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_carts_attr_1",
+        "parentId": "ent_carts",
+        "type": "Attribute",
+        "position": {
+          "x": 65,
+          "y": -88
+        },
+        "data": {
+          "label": "status",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_cart_items",
+        "type": "Entity",
+        "position": {
+          "x": 1000,
+          "y": 460
+        },
+        "data": {
+          "label": "cart_items",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_cart_items_attr_0",
+        "parentId": "ent_cart_items",
+        "type": "Attribute",
+        "position": {
+          "x": -130,
+          "y": -88
+        },
+        "data": {
+          "label": "user_id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_cart_items_attr_1",
+        "parentId": "ent_cart_items",
+        "type": "Attribute",
+        "position": {
+          "x": 0,
+          "y": -88
+        },
+        "data": {
+          "label": "product_model_id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_cart_items_attr_2",
+        "parentId": "ent_cart_items",
+        "type": "Attribute",
+        "position": {
+          "x": 130,
+          "y": -88
+        },
+        "data": {
+          "label": "quantity",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_models",
+        "type": "Entity",
+        "position": {
+          "x": 1500,
+          "y": 460
+        },
+        "data": {
+          "label": "product_models",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_models_attr_0",
+        "parentId": "ent_product_models",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_models_attr_1",
+        "parentId": "ent_product_models",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "sku",
+          "types": {
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_models_attr_2",
+        "parentId": "ent_product_models",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "price",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_models_attr_3",
+        "parentId": "ent_product_models",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "stock",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_products",
+        "type": "Entity",
+        "position": {
+          "x": 2000,
+          "y": 460
+        },
+        "data": {
+          "label": "products",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_products_attr_0",
+        "parentId": "ent_products",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_products_attr_1",
+        "parentId": "ent_products",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "name",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_products_attr_2",
+        "parentId": "ent_products",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "product_code",
+          "types": {
+            "Unique": true,
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_products_attr_3",
+        "parentId": "ent_products",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "cost_price",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_favorites",
+        "type": "Entity",
+        "position": {
+          "x": 2500,
+          "y": 460
+        },
+        "data": {
+          "label": "favorites",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_favorites_attr_0",
+        "parentId": "ent_favorites",
+        "type": "Attribute",
+        "position": {
+          "x": -65,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_favorites_attr_1",
+        "parentId": "ent_favorites",
+        "type": "Attribute",
+        "position": {
+          "x": 65,
+          "y": -88
+        },
+        "data": {
+          "label": "created_at",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_addresses",
+        "type": "Entity",
+        "position": {
+          "x": 0,
+          "y": 920
+        },
+        "data": {
+          "label": "addresses",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_addresses_attr_0",
+        "parentId": "ent_addresses",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_addresses_attr_1",
+        "parentId": "ent_addresses",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "full_name",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_addresses_attr_2",
+        "parentId": "ent_addresses",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "phone",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_addresses_attr_3",
+        "parentId": "ent_addresses",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "address",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_vouchers",
+        "type": "Entity",
+        "position": {
+          "x": 500,
+          "y": 920
+        },
+        "data": {
+          "label": "vouchers",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_vouchers_attr_0",
+        "parentId": "ent_vouchers",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_vouchers_attr_1",
+        "parentId": "ent_vouchers",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "code",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_vouchers_attr_2",
+        "parentId": "ent_vouchers",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "discount_type",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_vouchers_attr_3",
+        "parentId": "ent_vouchers",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "discount_value",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_orders",
+        "type": "Entity",
+        "position": {
+          "x": 1000,
+          "y": 920
+        },
+        "data": {
+          "label": "orders",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_orders_attr_0",
+        "parentId": "ent_orders",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_orders_attr_1",
+        "parentId": "ent_orders",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "order_code",
+          "types": {
+            "Unique": true,
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_orders_attr_2",
+        "parentId": "ent_orders",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "payment_total",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_orders_attr_3",
+        "parentId": "ent_orders",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "status_id",
+          "types": {
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_items",
+        "type": "Entity",
+        "position": {
+          "x": 1500,
+          "y": 920
+        },
+        "data": {
+          "label": "order_items",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_items_attr_0",
+        "parentId": "ent_order_items",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_items_attr_1",
+        "parentId": "ent_order_items",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "quantity",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_items_attr_2",
+        "parentId": "ent_order_items",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "unit_price",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_items_attr_3",
+        "parentId": "ent_order_items",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "line_total",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_movements",
+        "type": "Entity",
+        "position": {
+          "x": 2000,
+          "y": 920
+        },
+        "data": {
+          "label": "inventory_movements",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_movements_attr_0",
+        "parentId": "ent_inventory_movements",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_movements_attr_1",
+        "parentId": "ent_inventory_movements",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "movement_type",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_movements_attr_2",
+        "parentId": "ent_inventory_movements",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "quantity_change",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_inventory_movements_attr_3",
+        "parentId": "ent_inventory_movements",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "quantity_after",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_reviews",
+        "type": "Entity",
+        "position": {
+          "x": 2500,
+          "y": 920
+        },
+        "data": {
+          "label": "product_reviews",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_reviews_attr_0",
+        "parentId": "ent_product_reviews",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_reviews_attr_1",
+        "parentId": "ent_product_reviews",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "rating",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_reviews_attr_2",
+        "parentId": "ent_product_reviews",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "comment",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_product_reviews_attr_3",
+        "parentId": "ent_product_reviews",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "create_at",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_voucher_usages",
+        "type": "Entity",
+        "position": {
+          "x": 500,
+          "y": 1380
+        },
+        "data": {
+          "label": "voucher_usages",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_voucher_usages_attr_0",
+        "parentId": "ent_voucher_usages",
+        "type": "Attribute",
+        "position": {
+          "x": -130,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_voucher_usages_attr_1",
+        "parentId": "ent_voucher_usages",
+        "type": "Attribute",
+        "position": {
+          "x": 0,
+          "y": -88
+        },
+        "data": {
+          "label": "discount_amount",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_voucher_usages_attr_2",
+        "parentId": "ent_voucher_usages",
+        "type": "Attribute",
+        "position": {
+          "x": 130,
+          "y": -88
+        },
+        "data": {
+          "label": "used_at",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_payments",
+        "type": "Entity",
+        "position": {
+          "x": 1000,
+          "y": 1380
+        },
+        "data": {
+          "label": "payments",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_payments_attr_0",
+        "parentId": "ent_payments",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_payments_attr_1",
+        "parentId": "ent_payments",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "method",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_payments_attr_2",
+        "parentId": "ent_payments",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "amount",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_payments_attr_3",
+        "parentId": "ent_payments",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "status",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shipments",
+        "type": "Entity",
+        "position": {
+          "x": 1500,
+          "y": 1380
+        },
+        "data": {
+          "label": "shipments",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shipments_attr_0",
+        "parentId": "ent_shipments",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shipments_attr_1",
+        "parentId": "ent_shipments",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "tracking_code",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shipments_attr_2",
+        "parentId": "ent_shipments",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "carrier",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_shipments_attr_3",
+        "parentId": "ent_shipments",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "status",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_progresses",
+        "type": "Entity",
+        "position": {
+          "x": 2000,
+          "y": 1380
+        },
+        "data": {
+          "label": "order_progresses",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_progresses_attr_0",
+        "parentId": "ent_order_progresses",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -88
+        },
+        "data": {
+          "label": "id",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_progresses_attr_1",
+        "parentId": "ent_order_progresses",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -88
+        },
+        "data": {
+          "label": "status_id",
+          "types": {
+            "Optional": true
+          },
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_progresses_attr_2",
+        "parentId": "ent_order_progresses",
+        "type": "Attribute",
+        "position": {
+          "x": -75,
+          "y": -154
+        },
+        "data": {
+          "label": "note",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "ent_order_progresses_attr_3",
+        "parentId": "ent_order_progresses",
+        "type": "Attribute",
+        "position": {
+          "x": 75,
+          "y": -154
+        },
+        "data": {
+          "label": "created_at",
+          "types": {},
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_user_application",
+        "type": "Relationship",
+        "position": {
+          "x": 0,
+          "y": 230
+        },
+        "data": {
+          "label": "submits_application",
+          "sourceEntityDetails": {
+            "id": "ent_users",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_seller_applications",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_user_shop",
+        "type": "Relationship",
+        "position": {
+          "x": 250,
+          "y": 230
+        },
+        "data": {
+          "label": "owns_shop",
+          "sourceEntityDetails": {
+            "id": "ent_users",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_shops",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_shop_products",
+        "type": "Relationship",
+        "position": {
+          "x": 1250,
+          "y": 230
+        },
+        "data": {
+          "label": "sells_product",
+          "sourceEntityDetails": {
+            "id": "ent_shops",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_products",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_category_products",
+        "type": "Relationship",
+        "position": {
+          "x": 2250,
+          "y": 230
+        },
+        "data": {
+          "label": "classifies_product",
+          "sourceEntityDetails": {
+            "id": "ent_product_categories",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "targetEntityDetails": {
+            "id": "ent_products",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_product_models",
+        "type": "Relationship",
+        "position": {
+          "x": 1750,
+          "y": 460
+        },
+        "data": {
+          "label": "has_variant",
+          "sourceEntityDetails": {
+            "id": "ent_products",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_product_models",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_user_carts",
+        "type": "Relationship",
+        "position": {
+          "x": 250,
+          "y": 460
+        },
+        "data": {
+          "label": "owns_cart",
+          "sourceEntityDetails": {
+            "id": "ent_users",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_carts",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_cart_items",
+        "type": "Relationship",
+        "position": {
+          "x": 750,
+          "y": 460
+        },
+        "data": {
+          "label": "contains_item",
+          "sourceEntityDetails": {
+            "id": "ent_carts",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_cart_items",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_cart_variant",
+        "type": "Relationship",
+        "position": {
+          "x": 1250,
+          "y": 460
+        },
+        "data": {
+          "label": "selects_variant",
+          "sourceEntityDetails": {
+            "id": "ent_product_models",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_cart_items",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_user_orders",
+        "type": "Relationship",
+        "position": {
+          "x": 500,
+          "y": 690
+        },
+        "data": {
+          "label": "places_order",
+          "sourceEntityDetails": {
+            "id": "ent_users",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_shop_orders",
+        "type": "Relationship",
+        "position": {
+          "x": 750,
+          "y": 650
+        },
+        "data": {
+          "label": "receives_order",
+          "sourceEntityDetails": {
+            "id": "ent_shops",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_voucher_orders",
+        "type": "Relationship",
+        "position": {
+          "x": 750,
+          "y": 920
+        },
+        "data": {
+          "label": "applies_voucher",
+          "sourceEntityDetails": {
+            "id": "ent_vouchers",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_received_address",
+        "type": "Relationship",
+        "position": {
+          "x": 500,
+          "y": 1110
+        },
+        "data": {
+          "label": "ships_to",
+          "sourceEntityDetails": {
+            "id": "ent_addresses",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_order_items",
+        "type": "Relationship",
+        "position": {
+          "x": 1250,
+          "y": 920
+        },
+        "data": {
+          "label": "contains_order_item",
+          "sourceEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_order_items",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_item_variant",
+        "type": "Relationship",
+        "position": {
+          "x": 1500,
+          "y": 690
+        },
+        "data": {
+          "label": "snapshots_variant",
+          "sourceEntityDetails": {
+            "id": "ent_product_models",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_order_items",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_order_payments",
+        "type": "Relationship",
+        "position": {
+          "x": 1000,
+          "y": 1150
+        },
+        "data": {
+          "label": "has_payment",
+          "sourceEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_payments",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_order_shipment",
+        "type": "Relationship",
+        "position": {
+          "x": 1250,
+          "y": 1150
+        },
+        "data": {
+          "label": "has_shipment",
+          "sourceEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_shipments",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_user_favorites",
+        "type": "Relationship",
+        "position": {
+          "x": 1250,
+          "y": 650
+        },
+        "data": {
+          "label": "creates_favorite",
+          "sourceEntityDetails": {
+            "id": "ent_users",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_favorites",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_product_favorites",
+        "type": "Relationship",
+        "position": {
+          "x": 2250,
+          "y": 460
+        },
+        "data": {
+          "label": "is_favorited",
+          "sourceEntityDetails": {
+            "id": "ent_products",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_favorites",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_voucher_usages",
+        "type": "Relationship",
+        "position": {
+          "x": 290,
+          "y": 1150
+        },
+        "data": {
+          "label": "has_usage",
+          "sourceEntityDetails": {
+            "id": "ent_vouchers",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_voucher_usages",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_usage_user",
+        "type": "Relationship",
+        "position": {
+          "x": 250,
+          "y": 920
+        },
+        "data": {
+          "label": "used_by",
+          "sourceEntityDetails": {
+            "id": "ent_users",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_voucher_usages",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_usage_order",
+        "type": "Relationship",
+        "position": {
+          "x": 750,
+          "y": 1150
+        },
+        "data": {
+          "label": "used_for_order",
+          "sourceEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_voucher_usages",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_order_progresses",
+        "type": "Relationship",
+        "position": {
+          "x": 1500,
+          "y": 1150
+        },
+        "data": {
+          "label": "has_status_history",
+          "sourceEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_order_progresses",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_user_reviews",
+        "type": "Relationship",
+        "position": {
+          "x": 1040,
+          "y": 690
+        },
+        "data": {
+          "label": "writes_review",
+          "sourceEntityDetails": {
+            "id": "ent_users",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_product_reviews",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_product_reviews",
+        "type": "Relationship",
+        "position": {
+          "x": 2250,
+          "y": 690
+        },
+        "data": {
+          "label": "has_review",
+          "sourceEntityDetails": {
+            "id": "ent_products",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_product_reviews",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_order_review",
+        "type": "Relationship",
+        "position": {
+          "x": 1750,
+          "y": 920
+        },
+        "data": {
+          "label": "verifies_review",
+          "sourceEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_product_reviews",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_variant_prices",
+        "type": "Relationship",
+        "position": {
+          "x": 1750,
+          "y": 230
+        },
+        "data": {
+          "label": "has_price_history",
+          "sourceEntityDetails": {
+            "id": "ent_product_models",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_product_price_histories",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_shop_warehouses",
+        "type": "Relationship",
+        "position": {
+          "x": 750,
+          "y": 0
+        },
+        "data": {
+          "label": "owns_warehouse",
+          "sourceEntityDetails": {
+            "id": "ent_shops",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_warehouses",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_warehouse_stocks",
+        "type": "Relationship",
+        "position": {
+          "x": 1250,
+          "y": 0
+        },
+        "data": {
+          "label": "holds_stock",
+          "sourceEntityDetails": {
+            "id": "ent_warehouses",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_inventory_stocks",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_variant_stocks",
+        "type": "Relationship",
+        "position": {
+          "x": 1500,
+          "y": 230
+        },
+        "data": {
+          "label": "stock_of_variant",
+          "sourceEntityDetails": {
+            "id": "ent_product_models",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_inventory_stocks",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_warehouse_movements",
+        "type": "Relationship",
+        "position": {
+          "x": 1710,
+          "y": 650
+        },
+        "data": {
+          "label": "records_movement",
+          "sourceEntityDetails": {
+            "id": "ent_warehouses",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_inventory_movements",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_variant_movements",
+        "type": "Relationship",
+        "position": {
+          "x": 1860,
+          "y": 690
+        },
+        "data": {
+          "label": "moves_variant",
+          "sourceEntityDetails": {
+            "id": "ent_product_models",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_inventory_movements",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      },
+      {
+        "id": "rel_order_movements",
+        "type": "Relationship",
+        "position": {
+          "x": 1710,
+          "y": 1110
+        },
+        "data": {
+          "label": "causes_movement",
+          "sourceEntityDetails": {
+            "id": "ent_orders",
+            "minCardinality": "Optional",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "ent_inventory_movements",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isIdentifying": false,
+          "isSelected": false
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge_ent_seller_applications_attr_0",
+        "type": "Attribute",
+        "source": "ent_seller_applications",
+        "target": "ent_seller_applications_attr_0"
+      },
+      {
+        "id": "edge_ent_seller_applications_attr_1",
+        "type": "Attribute",
+        "source": "ent_seller_applications",
+        "target": "ent_seller_applications_attr_1"
+      },
+      {
+        "id": "edge_ent_seller_applications_attr_2",
+        "type": "Attribute",
+        "source": "ent_seller_applications",
+        "target": "ent_seller_applications_attr_2"
+      },
+      {
+        "id": "edge_ent_seller_applications_attr_3",
+        "type": "Attribute",
+        "source": "ent_seller_applications",
+        "target": "ent_seller_applications_attr_3"
+      },
+      {
+        "id": "edge_ent_shops_attr_0",
+        "type": "Attribute",
+        "source": "ent_shops",
+        "target": "ent_shops_attr_0"
+      },
+      {
+        "id": "edge_ent_shops_attr_1",
+        "type": "Attribute",
+        "source": "ent_shops",
+        "target": "ent_shops_attr_1"
+      },
+      {
+        "id": "edge_ent_shops_attr_2",
+        "type": "Attribute",
+        "source": "ent_shops",
+        "target": "ent_shops_attr_2"
+      },
+      {
+        "id": "edge_ent_shops_attr_3",
+        "type": "Attribute",
+        "source": "ent_shops",
+        "target": "ent_shops_attr_3"
+      },
+      {
+        "id": "edge_ent_warehouses_attr_0",
+        "type": "Attribute",
+        "source": "ent_warehouses",
+        "target": "ent_warehouses_attr_0"
+      },
+      {
+        "id": "edge_ent_warehouses_attr_1",
+        "type": "Attribute",
+        "source": "ent_warehouses",
+        "target": "ent_warehouses_attr_1"
+      },
+      {
+        "id": "edge_ent_warehouses_attr_2",
+        "type": "Attribute",
+        "source": "ent_warehouses",
+        "target": "ent_warehouses_attr_2"
+      },
+      {
+        "id": "edge_ent_warehouses_attr_3",
+        "type": "Attribute",
+        "source": "ent_warehouses",
+        "target": "ent_warehouses_attr_3"
+      },
+      {
+        "id": "edge_ent_inventory_stocks_attr_0",
+        "type": "Attribute",
+        "source": "ent_inventory_stocks",
+        "target": "ent_inventory_stocks_attr_0"
+      },
+      {
+        "id": "edge_ent_inventory_stocks_attr_1",
+        "type": "Attribute",
+        "source": "ent_inventory_stocks",
+        "target": "ent_inventory_stocks_attr_1"
+      },
+      {
+        "id": "edge_ent_inventory_stocks_attr_2",
+        "type": "Attribute",
+        "source": "ent_inventory_stocks",
+        "target": "ent_inventory_stocks_attr_2"
+      },
+      {
+        "id": "edge_ent_product_price_histories_attr_0",
+        "type": "Attribute",
+        "source": "ent_product_price_histories",
+        "target": "ent_product_price_histories_attr_0"
+      },
+      {
+        "id": "edge_ent_product_price_histories_attr_1",
+        "type": "Attribute",
+        "source": "ent_product_price_histories",
+        "target": "ent_product_price_histories_attr_1"
+      },
+      {
+        "id": "edge_ent_product_price_histories_attr_2",
+        "type": "Attribute",
+        "source": "ent_product_price_histories",
+        "target": "ent_product_price_histories_attr_2"
+      },
+      {
+        "id": "edge_ent_product_price_histories_attr_3",
+        "type": "Attribute",
+        "source": "ent_product_price_histories",
+        "target": "ent_product_price_histories_attr_3"
+      },
+      {
+        "id": "edge_ent_product_categories_attr_0",
+        "type": "Attribute",
+        "source": "ent_product_categories",
+        "target": "ent_product_categories_attr_0"
+      },
+      {
+        "id": "edge_ent_product_categories_attr_1",
+        "type": "Attribute",
+        "source": "ent_product_categories",
+        "target": "ent_product_categories_attr_1"
+      },
+      {
+        "id": "edge_ent_product_categories_attr_2",
+        "type": "Attribute",
+        "source": "ent_product_categories",
+        "target": "ent_product_categories_attr_2"
+      },
+      {
+        "id": "edge_ent_users_attr_0",
+        "type": "Attribute",
+        "source": "ent_users",
+        "target": "ent_users_attr_0"
+      },
+      {
+        "id": "edge_ent_users_attr_1",
+        "type": "Attribute",
+        "source": "ent_users",
+        "target": "ent_users_attr_1"
+      },
+      {
+        "id": "edge_ent_users_attr_2",
+        "type": "Attribute",
+        "source": "ent_users",
+        "target": "ent_users_attr_2"
+      },
+      {
+        "id": "edge_ent_users_attr_3",
+        "type": "Attribute",
+        "source": "ent_users",
+        "target": "ent_users_attr_3"
+      },
+      {
+        "id": "edge_ent_carts_attr_0",
+        "type": "Attribute",
+        "source": "ent_carts",
+        "target": "ent_carts_attr_0"
+      },
+      {
+        "id": "edge_ent_carts_attr_1",
+        "type": "Attribute",
+        "source": "ent_carts",
+        "target": "ent_carts_attr_1"
+      },
+      {
+        "id": "edge_ent_cart_items_attr_0",
+        "type": "Attribute",
+        "source": "ent_cart_items",
+        "target": "ent_cart_items_attr_0"
+      },
+      {
+        "id": "edge_ent_cart_items_attr_1",
+        "type": "Attribute",
+        "source": "ent_cart_items",
+        "target": "ent_cart_items_attr_1"
+      },
+      {
+        "id": "edge_ent_cart_items_attr_2",
+        "type": "Attribute",
+        "source": "ent_cart_items",
+        "target": "ent_cart_items_attr_2"
+      },
+      {
+        "id": "edge_ent_product_models_attr_0",
+        "type": "Attribute",
+        "source": "ent_product_models",
+        "target": "ent_product_models_attr_0"
+      },
+      {
+        "id": "edge_ent_product_models_attr_1",
+        "type": "Attribute",
+        "source": "ent_product_models",
+        "target": "ent_product_models_attr_1"
+      },
+      {
+        "id": "edge_ent_product_models_attr_2",
+        "type": "Attribute",
+        "source": "ent_product_models",
+        "target": "ent_product_models_attr_2"
+      },
+      {
+        "id": "edge_ent_product_models_attr_3",
+        "type": "Attribute",
+        "source": "ent_product_models",
+        "target": "ent_product_models_attr_3"
+      },
+      {
+        "id": "edge_ent_products_attr_0",
+        "type": "Attribute",
+        "source": "ent_products",
+        "target": "ent_products_attr_0"
+      },
+      {
+        "id": "edge_ent_products_attr_1",
+        "type": "Attribute",
+        "source": "ent_products",
+        "target": "ent_products_attr_1"
+      },
+      {
+        "id": "edge_ent_products_attr_2",
+        "type": "Attribute",
+        "source": "ent_products",
+        "target": "ent_products_attr_2"
+      },
+      {
+        "id": "edge_ent_products_attr_3",
+        "type": "Attribute",
+        "source": "ent_products",
+        "target": "ent_products_attr_3"
+      },
+      {
+        "id": "edge_ent_favorites_attr_0",
+        "type": "Attribute",
+        "source": "ent_favorites",
+        "target": "ent_favorites_attr_0"
+      },
+      {
+        "id": "edge_ent_favorites_attr_1",
+        "type": "Attribute",
+        "source": "ent_favorites",
+        "target": "ent_favorites_attr_1"
+      },
+      {
+        "id": "edge_ent_addresses_attr_0",
+        "type": "Attribute",
+        "source": "ent_addresses",
+        "target": "ent_addresses_attr_0"
+      },
+      {
+        "id": "edge_ent_addresses_attr_1",
+        "type": "Attribute",
+        "source": "ent_addresses",
+        "target": "ent_addresses_attr_1"
+      },
+      {
+        "id": "edge_ent_addresses_attr_2",
+        "type": "Attribute",
+        "source": "ent_addresses",
+        "target": "ent_addresses_attr_2"
+      },
+      {
+        "id": "edge_ent_addresses_attr_3",
+        "type": "Attribute",
+        "source": "ent_addresses",
+        "target": "ent_addresses_attr_3"
+      },
+      {
+        "id": "edge_ent_vouchers_attr_0",
+        "type": "Attribute",
+        "source": "ent_vouchers",
+        "target": "ent_vouchers_attr_0"
+      },
+      {
+        "id": "edge_ent_vouchers_attr_1",
+        "type": "Attribute",
+        "source": "ent_vouchers",
+        "target": "ent_vouchers_attr_1"
+      },
+      {
+        "id": "edge_ent_vouchers_attr_2",
+        "type": "Attribute",
+        "source": "ent_vouchers",
+        "target": "ent_vouchers_attr_2"
+      },
+      {
+        "id": "edge_ent_vouchers_attr_3",
+        "type": "Attribute",
+        "source": "ent_vouchers",
+        "target": "ent_vouchers_attr_3"
+      },
+      {
+        "id": "edge_ent_orders_attr_0",
+        "type": "Attribute",
+        "source": "ent_orders",
+        "target": "ent_orders_attr_0"
+      },
+      {
+        "id": "edge_ent_orders_attr_1",
+        "type": "Attribute",
+        "source": "ent_orders",
+        "target": "ent_orders_attr_1"
+      },
+      {
+        "id": "edge_ent_orders_attr_2",
+        "type": "Attribute",
+        "source": "ent_orders",
+        "target": "ent_orders_attr_2"
+      },
+      {
+        "id": "edge_ent_orders_attr_3",
+        "type": "Attribute",
+        "source": "ent_orders",
+        "target": "ent_orders_attr_3"
+      },
+      {
+        "id": "edge_ent_order_items_attr_0",
+        "type": "Attribute",
+        "source": "ent_order_items",
+        "target": "ent_order_items_attr_0"
+      },
+      {
+        "id": "edge_ent_order_items_attr_1",
+        "type": "Attribute",
+        "source": "ent_order_items",
+        "target": "ent_order_items_attr_1"
+      },
+      {
+        "id": "edge_ent_order_items_attr_2",
+        "type": "Attribute",
+        "source": "ent_order_items",
+        "target": "ent_order_items_attr_2"
+      },
+      {
+        "id": "edge_ent_order_items_attr_3",
+        "type": "Attribute",
+        "source": "ent_order_items",
+        "target": "ent_order_items_attr_3"
+      },
+      {
+        "id": "edge_ent_inventory_movements_attr_0",
+        "type": "Attribute",
+        "source": "ent_inventory_movements",
+        "target": "ent_inventory_movements_attr_0"
+      },
+      {
+        "id": "edge_ent_inventory_movements_attr_1",
+        "type": "Attribute",
+        "source": "ent_inventory_movements",
+        "target": "ent_inventory_movements_attr_1"
+      },
+      {
+        "id": "edge_ent_inventory_movements_attr_2",
+        "type": "Attribute",
+        "source": "ent_inventory_movements",
+        "target": "ent_inventory_movements_attr_2"
+      },
+      {
+        "id": "edge_ent_inventory_movements_attr_3",
+        "type": "Attribute",
+        "source": "ent_inventory_movements",
+        "target": "ent_inventory_movements_attr_3"
+      },
+      {
+        "id": "edge_ent_product_reviews_attr_0",
+        "type": "Attribute",
+        "source": "ent_product_reviews",
+        "target": "ent_product_reviews_attr_0"
+      },
+      {
+        "id": "edge_ent_product_reviews_attr_1",
+        "type": "Attribute",
+        "source": "ent_product_reviews",
+        "target": "ent_product_reviews_attr_1"
+      },
+      {
+        "id": "edge_ent_product_reviews_attr_2",
+        "type": "Attribute",
+        "source": "ent_product_reviews",
+        "target": "ent_product_reviews_attr_2"
+      },
+      {
+        "id": "edge_ent_product_reviews_attr_3",
+        "type": "Attribute",
+        "source": "ent_product_reviews",
+        "target": "ent_product_reviews_attr_3"
+      },
+      {
+        "id": "edge_ent_voucher_usages_attr_0",
+        "type": "Attribute",
+        "source": "ent_voucher_usages",
+        "target": "ent_voucher_usages_attr_0"
+      },
+      {
+        "id": "edge_ent_voucher_usages_attr_1",
+        "type": "Attribute",
+        "source": "ent_voucher_usages",
+        "target": "ent_voucher_usages_attr_1"
+      },
+      {
+        "id": "edge_ent_voucher_usages_attr_2",
+        "type": "Attribute",
+        "source": "ent_voucher_usages",
+        "target": "ent_voucher_usages_attr_2"
+      },
+      {
+        "id": "edge_ent_payments_attr_0",
+        "type": "Attribute",
+        "source": "ent_payments",
+        "target": "ent_payments_attr_0"
+      },
+      {
+        "id": "edge_ent_payments_attr_1",
+        "type": "Attribute",
+        "source": "ent_payments",
+        "target": "ent_payments_attr_1"
+      },
+      {
+        "id": "edge_ent_payments_attr_2",
+        "type": "Attribute",
+        "source": "ent_payments",
+        "target": "ent_payments_attr_2"
+      },
+      {
+        "id": "edge_ent_payments_attr_3",
+        "type": "Attribute",
+        "source": "ent_payments",
+        "target": "ent_payments_attr_3"
+      },
+      {
+        "id": "edge_ent_shipments_attr_0",
+        "type": "Attribute",
+        "source": "ent_shipments",
+        "target": "ent_shipments_attr_0"
+      },
+      {
+        "id": "edge_ent_shipments_attr_1",
+        "type": "Attribute",
+        "source": "ent_shipments",
+        "target": "ent_shipments_attr_1"
+      },
+      {
+        "id": "edge_ent_shipments_attr_2",
+        "type": "Attribute",
+        "source": "ent_shipments",
+        "target": "ent_shipments_attr_2"
+      },
+      {
+        "id": "edge_ent_shipments_attr_3",
+        "type": "Attribute",
+        "source": "ent_shipments",
+        "target": "ent_shipments_attr_3"
+      },
+      {
+        "id": "edge_ent_order_progresses_attr_0",
+        "type": "Attribute",
+        "source": "ent_order_progresses",
+        "target": "ent_order_progresses_attr_0"
+      },
+      {
+        "id": "edge_ent_order_progresses_attr_1",
+        "type": "Attribute",
+        "source": "ent_order_progresses",
+        "target": "ent_order_progresses_attr_1"
+      },
+      {
+        "id": "edge_ent_order_progresses_attr_2",
+        "type": "Attribute",
+        "source": "ent_order_progresses",
+        "target": "ent_order_progresses_attr_2"
+      },
+      {
+        "id": "edge_ent_order_progresses_attr_3",
+        "type": "Attribute",
+        "source": "ent_order_progresses",
+        "target": "ent_order_progresses_attr_3"
+      },
+      {
+        "id": "rel_user_application->ent_users;ent_users->ent_seller_applications",
+        "type": "Relationship",
+        "source": "rel_user_application",
+        "target": "ent_users",
+        "data": {
+          "id": "rel_user_application->ent_users",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_user_application->ent_seller_applications;ent_users->ent_seller_applications",
+        "type": "Relationship",
+        "source": "rel_user_application",
+        "target": "ent_seller_applications",
+        "data": {
+          "id": "rel_user_application->ent_seller_applications",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_user_shop->ent_users;ent_users->ent_shops",
+        "type": "Relationship",
+        "source": "rel_user_shop",
+        "target": "ent_users",
+        "data": {
+          "id": "rel_user_shop->ent_users",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_user_shop->ent_shops;ent_users->ent_shops",
+        "type": "Relationship",
+        "source": "rel_user_shop",
+        "target": "ent_shops",
+        "data": {
+          "id": "rel_user_shop->ent_shops",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_shop_products->ent_shops;ent_shops->ent_products",
+        "type": "Relationship",
+        "source": "rel_shop_products",
+        "target": "ent_shops",
+        "data": {
+          "id": "rel_shop_products->ent_shops",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_shop_products->ent_products;ent_shops->ent_products",
+        "type": "Relationship",
+        "source": "rel_shop_products",
+        "target": "ent_products",
+        "data": {
+          "id": "rel_shop_products->ent_products",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_category_products->ent_product_categories;ent_product_categories->ent_products",
+        "type": "Relationship",
+        "source": "rel_category_products",
+        "target": "ent_product_categories",
+        "data": {
+          "id": "rel_category_products->ent_product_categories",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_category_products->ent_products;ent_product_categories->ent_products",
+        "type": "Relationship",
+        "source": "rel_category_products",
+        "target": "ent_products",
+        "data": {
+          "id": "rel_category_products->ent_products",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_product_models->ent_products;ent_products->ent_product_models",
+        "type": "Relationship",
+        "source": "rel_product_models",
+        "target": "ent_products",
+        "data": {
+          "id": "rel_product_models->ent_products",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_product_models->ent_product_models;ent_products->ent_product_models",
+        "type": "Relationship",
+        "source": "rel_product_models",
+        "target": "ent_product_models",
+        "data": {
+          "id": "rel_product_models->ent_product_models",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_user_carts->ent_users;ent_users->ent_carts",
+        "type": "Relationship",
+        "source": "rel_user_carts",
+        "target": "ent_users",
+        "data": {
+          "id": "rel_user_carts->ent_users",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_user_carts->ent_carts;ent_users->ent_carts",
+        "type": "Relationship",
+        "source": "rel_user_carts",
+        "target": "ent_carts",
+        "data": {
+          "id": "rel_user_carts->ent_carts",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_cart_items->ent_carts;ent_carts->ent_cart_items",
+        "type": "Relationship",
+        "source": "rel_cart_items",
+        "target": "ent_carts",
+        "data": {
+          "id": "rel_cart_items->ent_carts",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_cart_items->ent_cart_items;ent_carts->ent_cart_items",
+        "type": "Relationship",
+        "source": "rel_cart_items",
+        "target": "ent_cart_items",
+        "data": {
+          "id": "rel_cart_items->ent_cart_items",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_cart_variant->ent_product_models;ent_product_models->ent_cart_items",
+        "type": "Relationship",
+        "source": "rel_cart_variant",
+        "target": "ent_product_models",
+        "data": {
+          "id": "rel_cart_variant->ent_product_models",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_cart_variant->ent_cart_items;ent_product_models->ent_cart_items",
+        "type": "Relationship",
+        "source": "rel_cart_variant",
+        "target": "ent_cart_items",
+        "data": {
+          "id": "rel_cart_variant->ent_cart_items",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_user_orders->ent_users;ent_users->ent_orders",
+        "type": "Relationship",
+        "source": "rel_user_orders",
+        "target": "ent_users",
+        "data": {
+          "id": "rel_user_orders->ent_users",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_user_orders->ent_orders;ent_users->ent_orders",
+        "type": "Relationship",
+        "source": "rel_user_orders",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_user_orders->ent_orders",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_shop_orders->ent_shops;ent_shops->ent_orders",
+        "type": "Relationship",
+        "source": "rel_shop_orders",
+        "target": "ent_shops",
+        "data": {
+          "id": "rel_shop_orders->ent_shops",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_shop_orders->ent_orders;ent_shops->ent_orders",
+        "type": "Relationship",
+        "source": "rel_shop_orders",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_shop_orders->ent_orders",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_voucher_orders->ent_vouchers;ent_vouchers->ent_orders",
+        "type": "Relationship",
+        "source": "rel_voucher_orders",
+        "target": "ent_vouchers",
+        "data": {
+          "id": "rel_voucher_orders->ent_vouchers",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_voucher_orders->ent_orders;ent_vouchers->ent_orders",
+        "type": "Relationship",
+        "source": "rel_voucher_orders",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_voucher_orders->ent_orders",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_received_address->ent_addresses;ent_addresses->ent_orders",
+        "type": "Relationship",
+        "source": "rel_received_address",
+        "target": "ent_addresses",
+        "data": {
+          "id": "rel_received_address->ent_addresses",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_received_address->ent_orders;ent_addresses->ent_orders",
+        "type": "Relationship",
+        "source": "rel_received_address",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_received_address->ent_orders",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_order_items->ent_orders;ent_orders->ent_order_items",
+        "type": "Relationship",
+        "source": "rel_order_items",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_order_items->ent_orders",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_order_items->ent_order_items;ent_orders->ent_order_items",
+        "type": "Relationship",
+        "source": "rel_order_items",
+        "target": "ent_order_items",
+        "data": {
+          "id": "rel_order_items->ent_order_items",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_item_variant->ent_product_models;ent_product_models->ent_order_items",
+        "type": "Relationship",
+        "source": "rel_item_variant",
+        "target": "ent_product_models",
+        "data": {
+          "id": "rel_item_variant->ent_product_models",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_item_variant->ent_order_items;ent_product_models->ent_order_items",
+        "type": "Relationship",
+        "source": "rel_item_variant",
+        "target": "ent_order_items",
+        "data": {
+          "id": "rel_item_variant->ent_order_items",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_order_payments->ent_orders;ent_orders->ent_payments",
+        "type": "Relationship",
+        "source": "rel_order_payments",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_order_payments->ent_orders",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_order_payments->ent_payments;ent_orders->ent_payments",
+        "type": "Relationship",
+        "source": "rel_order_payments",
+        "target": "ent_payments",
+        "data": {
+          "id": "rel_order_payments->ent_payments",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_order_shipment->ent_orders;ent_orders->ent_shipments",
+        "type": "Relationship",
+        "source": "rel_order_shipment",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_order_shipment->ent_orders",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_order_shipment->ent_shipments;ent_orders->ent_shipments",
+        "type": "Relationship",
+        "source": "rel_order_shipment",
+        "target": "ent_shipments",
+        "data": {
+          "id": "rel_order_shipment->ent_shipments",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_user_favorites->ent_users;ent_users->ent_favorites",
+        "type": "Relationship",
+        "source": "rel_user_favorites",
+        "target": "ent_users",
+        "data": {
+          "id": "rel_user_favorites->ent_users",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_user_favorites->ent_favorites;ent_users->ent_favorites",
+        "type": "Relationship",
+        "source": "rel_user_favorites",
+        "target": "ent_favorites",
+        "data": {
+          "id": "rel_user_favorites->ent_favorites",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_product_favorites->ent_products;ent_products->ent_favorites",
+        "type": "Relationship",
+        "source": "rel_product_favorites",
+        "target": "ent_products",
+        "data": {
+          "id": "rel_product_favorites->ent_products",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_product_favorites->ent_favorites;ent_products->ent_favorites",
+        "type": "Relationship",
+        "source": "rel_product_favorites",
+        "target": "ent_favorites",
+        "data": {
+          "id": "rel_product_favorites->ent_favorites",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_voucher_usages->ent_vouchers;ent_vouchers->ent_voucher_usages",
+        "type": "Relationship",
+        "source": "rel_voucher_usages",
+        "target": "ent_vouchers",
+        "data": {
+          "id": "rel_voucher_usages->ent_vouchers",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_voucher_usages->ent_voucher_usages;ent_vouchers->ent_voucher_usages",
+        "type": "Relationship",
+        "source": "rel_voucher_usages",
+        "target": "ent_voucher_usages",
+        "data": {
+          "id": "rel_voucher_usages->ent_voucher_usages",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_usage_user->ent_users;ent_users->ent_voucher_usages",
+        "type": "Relationship",
+        "source": "rel_usage_user",
+        "target": "ent_users",
+        "data": {
+          "id": "rel_usage_user->ent_users",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_usage_user->ent_voucher_usages;ent_users->ent_voucher_usages",
+        "type": "Relationship",
+        "source": "rel_usage_user",
+        "target": "ent_voucher_usages",
+        "data": {
+          "id": "rel_usage_user->ent_voucher_usages",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_usage_order->ent_orders;ent_orders->ent_voucher_usages",
+        "type": "Relationship",
+        "source": "rel_usage_order",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_usage_order->ent_orders",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_usage_order->ent_voucher_usages;ent_orders->ent_voucher_usages",
+        "type": "Relationship",
+        "source": "rel_usage_order",
+        "target": "ent_voucher_usages",
+        "data": {
+          "id": "rel_usage_order->ent_voucher_usages",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_order_progresses->ent_orders;ent_orders->ent_order_progresses",
+        "type": "Relationship",
+        "source": "rel_order_progresses",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_order_progresses->ent_orders",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_order_progresses->ent_order_progresses;ent_orders->ent_order_progresses",
+        "type": "Relationship",
+        "source": "rel_order_progresses",
+        "target": "ent_order_progresses",
+        "data": {
+          "id": "rel_order_progresses->ent_order_progresses",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_user_reviews->ent_users;ent_users->ent_product_reviews",
+        "type": "Relationship",
+        "source": "rel_user_reviews",
+        "target": "ent_users",
+        "data": {
+          "id": "rel_user_reviews->ent_users",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_user_reviews->ent_product_reviews;ent_users->ent_product_reviews",
+        "type": "Relationship",
+        "source": "rel_user_reviews",
+        "target": "ent_product_reviews",
+        "data": {
+          "id": "rel_user_reviews->ent_product_reviews",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_product_reviews->ent_products;ent_products->ent_product_reviews",
+        "type": "Relationship",
+        "source": "rel_product_reviews",
+        "target": "ent_products",
+        "data": {
+          "id": "rel_product_reviews->ent_products",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_product_reviews->ent_product_reviews;ent_products->ent_product_reviews",
+        "type": "Relationship",
+        "source": "rel_product_reviews",
+        "target": "ent_product_reviews",
+        "data": {
+          "id": "rel_product_reviews->ent_product_reviews",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_order_review->ent_orders;ent_orders->ent_product_reviews",
+        "type": "Relationship",
+        "source": "rel_order_review",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_order_review->ent_orders",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_order_review->ent_product_reviews;ent_orders->ent_product_reviews",
+        "type": "Relationship",
+        "source": "rel_order_review",
+        "target": "ent_product_reviews",
+        "data": {
+          "id": "rel_order_review->ent_product_reviews",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_variant_prices->ent_product_models;ent_product_models->ent_product_price_histories",
+        "type": "Relationship",
+        "source": "rel_variant_prices",
+        "target": "ent_product_models",
+        "data": {
+          "id": "rel_variant_prices->ent_product_models",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_variant_prices->ent_product_price_histories;ent_product_models->ent_product_price_histories",
+        "type": "Relationship",
+        "source": "rel_variant_prices",
+        "target": "ent_product_price_histories",
+        "data": {
+          "id": "rel_variant_prices->ent_product_price_histories",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_shop_warehouses->ent_shops;ent_shops->ent_warehouses",
+        "type": "Relationship",
+        "source": "rel_shop_warehouses",
+        "target": "ent_shops",
+        "data": {
+          "id": "rel_shop_warehouses->ent_shops",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_shop_warehouses->ent_warehouses;ent_shops->ent_warehouses",
+        "type": "Relationship",
+        "source": "rel_shop_warehouses",
+        "target": "ent_warehouses",
+        "data": {
+          "id": "rel_shop_warehouses->ent_warehouses",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_warehouse_stocks->ent_warehouses;ent_warehouses->ent_inventory_stocks",
+        "type": "Relationship",
+        "source": "rel_warehouse_stocks",
+        "target": "ent_warehouses",
+        "data": {
+          "id": "rel_warehouse_stocks->ent_warehouses",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_warehouse_stocks->ent_inventory_stocks;ent_warehouses->ent_inventory_stocks",
+        "type": "Relationship",
+        "source": "rel_warehouse_stocks",
+        "target": "ent_inventory_stocks",
+        "data": {
+          "id": "rel_warehouse_stocks->ent_inventory_stocks",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_variant_stocks->ent_product_models;ent_product_models->ent_inventory_stocks",
+        "type": "Relationship",
+        "source": "rel_variant_stocks",
+        "target": "ent_product_models",
+        "data": {
+          "id": "rel_variant_stocks->ent_product_models",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_variant_stocks->ent_inventory_stocks;ent_product_models->ent_inventory_stocks",
+        "type": "Relationship",
+        "source": "rel_variant_stocks",
+        "target": "ent_inventory_stocks",
+        "data": {
+          "id": "rel_variant_stocks->ent_inventory_stocks",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_warehouse_movements->ent_warehouses;ent_warehouses->ent_inventory_movements",
+        "type": "Relationship",
+        "source": "rel_warehouse_movements",
+        "target": "ent_warehouses",
+        "data": {
+          "id": "rel_warehouse_movements->ent_warehouses",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_warehouse_movements->ent_inventory_movements;ent_warehouses->ent_inventory_movements",
+        "type": "Relationship",
+        "source": "rel_warehouse_movements",
+        "target": "ent_inventory_movements",
+        "data": {
+          "id": "rel_warehouse_movements->ent_inventory_movements",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_variant_movements->ent_product_models;ent_product_models->ent_inventory_movements",
+        "type": "Relationship",
+        "source": "rel_variant_movements",
+        "target": "ent_product_models",
+        "data": {
+          "id": "rel_variant_movements->ent_product_models",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_variant_movements->ent_inventory_movements;ent_product_models->ent_inventory_movements",
+        "type": "Relationship",
+        "source": "rel_variant_movements",
+        "target": "ent_inventory_movements",
+        "data": {
+          "id": "rel_variant_movements->ent_inventory_movements",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "rel_order_movements->ent_orders;ent_orders->ent_inventory_movements",
+        "type": "Relationship",
+        "source": "rel_order_movements",
+        "target": "ent_orders",
+        "data": {
+          "id": "rel_order_movements->ent_orders",
+          "minCardinality": "Optional",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "rel_order_movements->ent_inventory_movements;ent_orders->ent_inventory_movements",
+        "type": "Relationship",
+        "source": "rel_order_movements",
+        "target": "ent_inventory_movements",
+        "data": {
+          "id": "rel_order_movements->ent_inventory_movements",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      }
+    ],
+    "viewport": {
+      "x": 140,
+      "y": 120,
+      "zoom": 0.39
+    }
+  },
+  "name": "shoppe-a4",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 493230
+  },
+  "id": 724548,
+  "updatedAtTimestamp": 1794299165
+}

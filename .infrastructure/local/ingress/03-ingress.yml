@@ -1,0 +1,56 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  labels:
+    app: nginx-ingress
+    component: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.org/location-snippets: |
+      set $check 0;
+
+      if ($http_origin ~ ^(http://localhost:3333|https://www.shopest.tk|https://e-shopee.vercel.app|https://vanhxiiiiiiiiiiii.github.io)$) {
+          set $check 1;
+      }
+
+      if ($uri ~ ^/resources) {
+          set $check 1$check;
+      }
+
+      if ($check = 11) {
+          add_header "Access-Control-Allow-Origin" $http_origin;
+          add_header 'Access-Control-Allow-Methods' "GET, POST, OPTIONS";
+      }
+
+spec:
+  ingressClassName: nginx-ingress
+  tls:
+    - hosts:
+        - ec.local
+      secretName: ingress-tls-secret
+  rules:
+    - host: ec.local
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: api
+                port:
+                  number: 80
+          - path: /resources
+            pathType: Prefix
+            backend:
+              service:
+                name: api
+                port:
+                  number: 80
+          - path: /adminer
+            pathType: Prefix
+            backend:
+              service:
+                name: adminer
+                port:
+                  number: 80
